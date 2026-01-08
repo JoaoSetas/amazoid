@@ -1,0 +1,162 @@
+Amazoid_EN = {
+    -- Sandbox Options
+    Amazoid_LetterSpawnChance = "Letter Spawn Chance",
+    Amazoid_LetterSpawnChance_tooltip = "Chance (0-1) for a discovery letter to spawn in each mailbox. Default: 0.1 (10%)",
+    
+    Amazoid_SpawnInStartingHouse = "Spawn in Starting House",
+    Amazoid_SpawnInStartingHouse_tooltip = "Always spawn a discovery letter in the nearest mailbox to the player's starting location.",
+    
+    Amazoid_SpawnInAllMailboxes = "Spawn in All Mailboxes",
+    Amazoid_SpawnInAllMailboxes_tooltip = "Spawn discovery letters in all mailboxes. Overrides spawn chance.",
+    
+    Amazoid_MaxLettersPerCell = "Max Letters Per Cell",
+    Amazoid_MaxLettersPerCell_tooltip = "Maximum number of discovery letters that can spawn per map cell.",
+    
+    Amazoid_PriceMultiplier = "Price Multiplier",
+    Amazoid_PriceMultiplier_tooltip = "Multiplier for all catalog item prices. Higher = more expensive.",
+    
+    Amazoid_DeliveryTimeMultiplier = "Delivery Time Multiplier",
+    Amazoid_DeliveryTimeMultiplier_tooltip = "Multiplier for delivery times. Higher = longer wait times.",
+    
+    Amazoid_ReputationGainMultiplier = "Reputation Gain Multiplier",
+    Amazoid_ReputationGainMultiplier_tooltip = "Multiplier for reputation gains. Higher = faster reputation building.",
+    
+    Amazoid_ReputationLossMultiplier = "Reputation Loss Multiplier",
+    Amazoid_ReputationLossMultiplier_tooltip = "Multiplier for reputation losses. Higher = harsher penalties.",
+    
+    Amazoid_StartingReputation = "Starting Reputation",
+    Amazoid_StartingReputation_tooltip = "Initial reputation when signing the contract.",
+    
+    Amazoid_MissionsEnabled = "Missions Enabled",
+    Amazoid_MissionsEnabled_tooltip = "Enable the mission system.",
+    
+    Amazoid_CollectionMissionsEnabled = "Collection Missions",
+    Amazoid_CollectionMissionsEnabled_tooltip = "Enable collection-type missions.",
+    
+    Amazoid_EliminationMissionsEnabled = "Elimination Missions",
+    Amazoid_EliminationMissionsEnabled_tooltip = "Enable elimination-type missions.",
+    
+    Amazoid_ScavengerMissionsEnabled = "Scavenger Missions",
+    Amazoid_ScavengerMissionsEnabled_tooltip = "Enable scavenger hunt missions.",
+    
+    Amazoid_TimedDeliveryMissionsEnabled = "Timed Delivery Missions",
+    Amazoid_TimedDeliveryMissionsEnabled_tooltip = "Enable timed delivery missions.",
+    
+    Amazoid_ProtectionMissionsEnabled = "Protection Missions",
+    Amazoid_ProtectionMissionsEnabled_tooltip = "Enable protection device missions.",
+    
+    Amazoid_MissionRewardMultiplier = "Mission Reward Multiplier",
+    Amazoid_MissionRewardMultiplier_tooltip = "Multiplier for mission rewards.",
+    
+    Amazoid_GiftsEnabled = "Gifts Enabled",
+    Amazoid_GiftsEnabled_tooltip = "Enable the merchant gift system.",
+    
+    Amazoid_GiftCooldownHours = "Gift Cooldown (Hours)",
+    Amazoid_GiftCooldownHours_tooltip = "Minimum hours between receiving gifts.",
+    
+    Amazoid_ProtectionDurationMinutes = "Protection Duration (Minutes)",
+    Amazoid_ProtectionDurationMinutes_tooltip = "Duration of protection missions in real-time minutes.",
+    
+    Amazoid_ProtectionDeviceHealth = "Protection Device Health",
+    Amazoid_ProtectionDeviceHealth_tooltip = "Starting health of protection devices.",
+    
+    Amazoid_BasicCatalogEnabled = "Basic Catalog",
+    Amazoid_BasicCatalogEnabled_tooltip = "Enable the basic supplies catalog.",
+    
+    Amazoid_ToolsCatalogEnabled = "Tools Catalog",
+    Amazoid_ToolsCatalogEnabled_tooltip = "Enable the tools catalog.",
+    
+    Amazoid_WeaponsCatalogEnabled = "Weapons Catalog",
+    Amazoid_WeaponsCatalogEnabled_tooltip = "Enable the weapons catalog.",
+    
+    Amazoid_MedicalCatalogEnabled = "Medical Catalog",
+    Amazoid_MedicalCatalogEnabled_tooltip = "Enable the medical supplies catalog.",
+    
+    Amazoid_SeasonalCatalogEnabled = "Seasonal Catalog",
+    Amazoid_SeasonalCatalogEnabled_tooltip = "Enable the seasonal items catalog.",
+    
+    Amazoid_BlackMarketCatalogEnabled = "Black Market Catalog",
+    Amazoid_BlackMarketCatalogEnabled_tooltip = "Enable the black market catalog.",
+    
+    Amazoid_ToolsCatalogReputation = "Tools Catalog Reputation",
+    Amazoid_ToolsCatalogReputation_tooltip = "Reputation required to unlock the tools catalog.",
+    
+    Amazoid_WeaponsCatalogReputation = "Weapons Catalog Reputation",
+    Amazoid_WeaponsCatalogReputation_tooltip = "Reputation required to unlock the weapons catalog.",
+    
+    Amazoid_MedicalCatalogReputation = "Medical Catalog Reputation",
+    Amazoid_MedicalCatalogReputation_tooltip = "Reputation required to unlock the medical catalog.",
+    
+    Amazoid_SeasonalCatalogReputation = "Seasonal Catalog Reputation",
+    Amazoid_SeasonalCatalogReputation_tooltip = "Reputation required to unlock the seasonal catalog.",
+    
+    Amazoid_BlackMarketCatalogReputation = "Black Market Catalog Reputation",
+    Amazoid_BlackMarketCatalogReputation_tooltip = "Reputation required to unlock the black market catalog.",
+    
+    -- Item Tooltips
+    Amazoid_DiscoveryLetter_Tooltip = "A mysterious letter offering a strange service...",
+    Amazoid_BasicCatalog_Tooltip = "Browse basic supplies available for order.",
+    Amazoid_ToolsCatalog_Tooltip = "Browse tools and building materials.",
+    Amazoid_WeaponsCatalog_Tooltip = "Browse weapons and ammunition.",
+    Amazoid_MedicalCatalog_Tooltip = "Browse medical supplies.",
+    Amazoid_SeasonalCatalog_Tooltip = "Browse seasonal items.",
+    Amazoid_BlackMarketCatalog_Tooltip = "Browse rare and powerful items.",
+    Amazoid_MissionLetter_Tooltip = "A letter containing mission details from the merchants.",
+    Amazoid_LoreLetter_Tooltip = "A personal letter revealing more about the merchants.",
+    Amazoid_DeliveryNoteLetter_Tooltip = "Confirmation that your order has been delivered.",
+    Amazoid_GiftLetter_Tooltip = "A note accompanying a gift from the merchants.",
+    Amazoid_SignedContract_Tooltip = "Your signed contract with Amazoid services.",
+    Amazoid_DeliveryPackage_Tooltip = "A sealed package for delivery. Do not open.",
+    Amazoid_ProtectionDevice_Tooltip = "A strange device that makes noise. The merchants find it amusing.",
+    Amazoid_LargeMailboxKit_Tooltip = "Kit for building a large mailbox. Can hold medium-sized items.",
+    Amazoid_DeliveryCrateKit_Tooltip = "Kit for building a delivery crate. Can hold large items.",
+    
+    -- UI Text
+    Amazoid_UI_Catalog_Title = "Amazoid Catalog",
+    Amazoid_UI_Missions_Title = "Amazoid Missions",
+    Amazoid_UI_Reputation = "Reputation",
+    Amazoid_UI_Discount = "Discount",
+    Amazoid_UI_Total = "Total",
+    Amazoid_UI_AddToCart = "Add to Cart",
+    Amazoid_UI_PlaceOrder = "Place Order",
+    Amazoid_UI_Clear = "Clear",
+    Amazoid_UI_Accept = "Accept",
+    Amazoid_UI_Abandon = "Abandon",
+    Amazoid_UI_Available = "Available",
+    Amazoid_UI_Active = "Active",
+    Amazoid_UI_Requirements = "Requirements",
+    Amazoid_UI_Rewards = "Rewards",
+    Amazoid_UI_TimeLimit = "Time Limit",
+    Amazoid_UI_Progress = "Progress",
+    Amazoid_UI_SignContract = "Sign Contract",
+    Amazoid_UI_Close = "Close",
+    
+    -- Context Menu
+    Amazoid_ContextMenu_Services = "Amazoid Services",
+    Amazoid_ContextMenu_ReadLetter = "Read Discovery Letter",
+    Amazoid_ContextMenu_ViewCatalog = "View Catalog",
+    Amazoid_ContextMenu_ViewMissions = "View Missions",
+    Amazoid_ContextMenu_CheckOrders = "Check Order Status",
+    Amazoid_ContextMenu_CheckMail = "Check for Mail",
+    Amazoid_ContextMenu_NoService = "No service available here",
+    
+    -- Mission Types
+    Amazoid_Mission_Collection = "Collection",
+    Amazoid_Mission_Elimination = "Elimination",
+    Amazoid_Mission_Scavenger = "Scavenger Hunt",
+    Amazoid_Mission_TimedDelivery = "Timed Delivery",
+    Amazoid_Mission_Protection = "Protection",
+    
+    -- Messages
+    Amazoid_Msg_OrderPlaced = "Order placed! Delivery in approximately %d hours.",
+    Amazoid_Msg_OrderDelivered = "Your order has been delivered!",
+    Amazoid_Msg_MissionAccepted = "Mission accepted!",
+    Amazoid_Msg_MissionCompleted = "Mission completed successfully!",
+    Amazoid_Msg_MissionFailed = "Mission failed.",
+    Amazoid_Msg_MissionTimedOut = "Mission timed out.",
+    Amazoid_Msg_ContractSigned = "Welcome to Amazoid services!",
+    Amazoid_Msg_GiftReceived = "The merchants have left you a gift.",
+    Amazoid_Msg_NoOrders = "No pending orders.",
+    Amazoid_Msg_MailboxEmpty = "Mailbox is empty.",
+    Amazoid_Msg_ItemsFound = "Found %d item(s) in the mailbox.",
+}

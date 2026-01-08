@@ -1,0 +1,7 @@
+name=Amazoid - Mysterious Mailbox Merchant
+id=Amazoid
+author=setas
+description=A mysterious merchant leaves letters in mailboxes offering goods and missions. Build reputation, unlock catalogs, and discover the truth behind the merchant. \n\n Features: \n - Random mailbox discovery \n - Catalog ordering system \n - Reputation-based progression \n - Seasonal and Black Market catalogs \n - Multiple mission types \n - Deep lore and mystery
+poster=poster.png
+modversion=0.1.0
+versionMin=42.0

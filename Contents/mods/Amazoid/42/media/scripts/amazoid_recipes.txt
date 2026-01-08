@@ -1,0 +1,93 @@
+/**
+ * Amazoid - Mysterious Mailbox Merchant
+ * Recipe Definitions
+ * 
+ * This file defines crafting recipes for Amazoid items.
+ */
+
+module Amazoid
+{
+    /**
+     * Craft Large Mailbox from kit
+     * Requires Carpentry level 4
+     */
+    recipe Build Large Mailbox
+    {
+        LargeMailboxKit,
+        Hammer,
+        Nails = 10,
+        Plank = 4,
+        
+        Result: LargeMailbox,
+        Time: 120.0,
+        Category: Carpentry,
+        OnCreate: Amazoid.OnCraftLargeMailbox,
+        
+        SkillRequired: Carpentry = 4,
+        
+        NeedToBeLearn: false,
+    }
+    
+    /**
+     * Craft Delivery Crate from kit
+     * Requires Carpentry level 6
+     */
+    recipe Build Delivery Crate
+    {
+        DeliveryCrateKit,
+        Hammer,
+        Nails = 20,
+        Plank = 8,
+        MetalBar = 2,
+        
+        Result: DeliveryCrate,
+        Time: 180.0,
+        Category: Carpentry,
+        OnCreate: Amazoid.OnCraftDeliveryCrate,
+        
+        SkillRequired: Carpentry = 6,
+        
+        NeedToBeLearn: false,
+    }
+    
+    /**
+     * Craft Large Mailbox Kit (alternative without finding one)
+     * Requires Metalworking level 3
+     */
+    recipe Assemble Large Mailbox Kit
+    {
+        SheetMetal = 2,
+        MetalPipe,
+        Screws = 5,
+        Screwdriver,
+        
+        Result: LargeMailboxKit,
+        Time: 90.0,
+        Category: Metalworking,
+        
+        SkillRequired: Metalworking = 3,
+        
+        NeedToBeLearn: false,
+    }
+    
+    /**
+     * Craft Delivery Crate Kit (alternative without finding one)
+     * Requires Metalworking level 5
+     */
+    recipe Assemble Delivery Crate Kit
+    {
+        SheetMetal = 4,
+        MetalBar = 3,
+        Screws = 10,
+        Hinge = 2,
+        Screwdriver,
+        
+        Result: DeliveryCrateKit,
+        Time: 150.0,
+        Category: Metalworking,
+        
+        SkillRequired: Metalworking = 5,
+        
+        NeedToBeLearn: false,
+    }
+}

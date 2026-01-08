@@ -1,0 +1,246 @@
+/**
+ * Amazoid - Mysterious Mailbox Merchant
+ * Item Definitions
+ * 
+ * This file defines all custom items for the Amazoid mod.
+ */
+
+module Amazoid
+{
+    /**
+     * Discovery Letter - Found in mailboxes, starts the Amazoid service
+     */
+    item DiscoveryLetter
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        DisplayName = Mysterious Letter,
+        Icon = Newspaper,
+        Weight = 0.1,
+        WorldStaticModel = Newspaper,
+        Tooltip = Amazoid_DiscoveryLetter_Tooltip,
+        
+        /* Custom properties */
+        TeachedRecipes = ,
+        ReplaceOnUse = ,
+        UseDelta = 0,
+    }
+    
+    /**
+     * Basic Catalog - Shows items available for purchase
+     */
+    item BasicCatalog
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        DisplayName = Amazoid Basic Catalog,
+        Icon = Magazine,
+        Weight = 0.2,
+        WorldStaticModel = Magazine,
+        Tooltip = Amazoid_BasicCatalog_Tooltip,
+    }
+    
+    /**
+     * Tools Catalog
+     */
+    item ToolsCatalog
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        DisplayName = Amazoid Tools Catalog,
+        Icon = Magazine,
+        Weight = 0.2,
+        WorldStaticModel = Magazine,
+        Tooltip = Amazoid_ToolsCatalog_Tooltip,
+    }
+    
+    /**
+     * Weapons Catalog
+     */
+    item WeaponsCatalog
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        DisplayName = Amazoid Weapons Catalog,
+        Icon = Magazine,
+        Weight = 0.2,
+        WorldStaticModel = Magazine,
+        Tooltip = Amazoid_WeaponsCatalog_Tooltip,
+    }
+    
+    /**
+     * Medical Catalog
+     */
+    item MedicalCatalog
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        DisplayName = Amazoid Medical Catalog,
+        Icon = Magazine,
+        Weight = 0.2,
+        WorldStaticModel = Magazine,
+        Tooltip = Amazoid_MedicalCatalog_Tooltip,
+    }
+    
+    /**
+     * Seasonal Catalog
+     */
+    item SeasonalCatalog
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        DisplayName = Amazoid Seasonal Catalog,
+        Icon = Magazine,
+        Weight = 0.2,
+        WorldStaticModel = Magazine,
+        Tooltip = Amazoid_SeasonalCatalog_Tooltip,
+    }
+    
+    /**
+     * Black Market Catalog
+     */
+    item BlackMarketCatalog
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        DisplayName = Amazoid Black Market Catalog,
+        Icon = Magazine,
+        Weight = 0.2,
+        WorldStaticModel = Magazine,
+        Tooltip = Amazoid_BlackMarketCatalog_Tooltip,
+    }
+    
+    /**
+     * Mission Letter - Contains mission details
+     */
+    item MissionLetter
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        DisplayName = Mission Letter,
+        Icon = Newspaper,
+        Weight = 0.1,
+        WorldStaticModel = Newspaper,
+        Tooltip = Amazoid_MissionLetter_Tooltip,
+    }
+    
+    /**
+     * Lore Letter - Contains backstory and hints
+     */
+    item LoreLetter
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        DisplayName = Personal Letter,
+        Icon = Newspaper,
+        Weight = 0.1,
+        WorldStaticModel = Newspaper,
+        Tooltip = Amazoid_LoreLetter_Tooltip,
+    }
+    
+    /**
+     * Delivery Note Letter - Confirms order delivery
+     */
+    item DeliveryNoteLetter
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        DisplayName = Delivery Confirmation,
+        Icon = Newspaper,
+        Weight = 0.1,
+        WorldStaticModel = Newspaper,
+        Tooltip = Amazoid_DeliveryNoteLetter_Tooltip,
+    }
+    
+    /**
+     * Gift Letter - Accompanies merchant gifts
+     */
+    item GiftLetter
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        DisplayName = Gift Note,
+        Icon = Newspaper,
+        Weight = 0.1,
+        WorldStaticModel = Newspaper,
+        Tooltip = Amazoid_GiftLetter_Tooltip,
+    }
+    
+    /**
+     * Signed Contract - Proof of service agreement
+     */
+    item SignedContract
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        DisplayName = Amazoid Contract,
+        Icon = Newspaper,
+        Weight = 0.1,
+        WorldStaticModel = Newspaper,
+        Tooltip = Amazoid_SignedContract_Tooltip,
+    }
+    
+    /**
+     * Delivery Package - Used for timed delivery missions
+     */
+    item DeliveryPackage
+    {
+        DisplayCategory = Item,
+        Type = Normal,
+        DisplayName = Sealed Package,
+        Icon = Box,
+        Weight = 2.0,
+        WorldStaticModel = Box,
+        Tooltip = Amazoid_DeliveryPackage_Tooltip,
+        
+        /* Cannot be opened */
+        CanBeOpened = false,
+    }
+    
+    /**
+     * Protection Device - Noisy device for protection missions
+     */
+    item ProtectionDevice
+    {
+        DisplayCategory = Item,
+        Type = Normal,
+        DisplayName = Strange Device,
+        Icon = Radio,
+        Weight = 3.0,
+        WorldStaticModel = Radio,
+        Tooltip = Amazoid_ProtectionDevice_Tooltip,
+        
+        /* Device properties */
+        TwoHandWeapon = false,
+        ConditionMax = 100,
+        ConditionLowerChance = 0,
+    }
+    
+    /**
+     * Large Mailbox Kit - For building large mailboxes
+     */
+    item LargeMailboxKit
+    {
+        DisplayCategory = Item,
+        Type = Normal,
+        DisplayName = Large Mailbox Kit,
+        Icon = Box,
+        Weight = 5.0,
+        WorldStaticModel = Box,
+        Tooltip = Amazoid_LargeMailboxKit_Tooltip,
+    }
+    
+    /**
+     * Delivery Crate Kit - For building delivery crates
+     */
+    item DeliveryCrateKit
+    {
+        DisplayCategory = Item,
+        Type = Normal,
+        DisplayName = Delivery Crate Kit,
+        Icon = Crate,
+        Weight = 10.0,
+        WorldStaticModel = Crate,
+        Tooltip = Amazoid_DeliveryCrateKit_Tooltip,
+    }
+}

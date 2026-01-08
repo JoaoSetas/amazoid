@@ -1,0 +1,281 @@
+VERSION = 1,
+
+option Amazoid.LetterSpawnChance
+{
+    type = double,
+    min = 0.0,
+    max = 1.0,
+    default = 0.1,
+    page = Amazoid,
+    translation = Amazoid_LetterSpawnChance,
+}
+
+option Amazoid.SpawnInStartingHouse
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_SpawnInStartingHouse,
+}
+
+option Amazoid.SpawnInAllMailboxes
+{
+    type = boolean,
+    default = false,
+    page = Amazoid,
+    translation = Amazoid_SpawnInAllMailboxes,
+}
+
+option Amazoid.MaxLettersPerCell
+{
+    type = integer,
+    min = 1,
+    max = 10,
+    default = 1,
+    page = Amazoid,
+    translation = Amazoid_MaxLettersPerCell,
+}
+
+option Amazoid.PriceMultiplier
+{
+    type = double,
+    min = 0.1,
+    max = 5.0,
+    default = 1.0,
+    page = Amazoid,
+    translation = Amazoid_PriceMultiplier,
+}
+
+option Amazoid.DeliveryTimeMultiplier
+{
+    type = double,
+    min = 0.1,
+    max = 5.0,
+    default = 1.0,
+    page = Amazoid,
+    translation = Amazoid_DeliveryTimeMultiplier,
+}
+
+option Amazoid.ReputationGainMultiplier
+{
+    type = double,
+    min = 0.1,
+    max = 5.0,
+    default = 1.0,
+    page = Amazoid,
+    translation = Amazoid_ReputationGainMultiplier,
+}
+
+option Amazoid.ReputationLossMultiplier
+{
+    type = double,
+    min = 0.1,
+    max = 5.0,
+    default = 1.0,
+    page = Amazoid,
+    translation = Amazoid_ReputationLossMultiplier,
+}
+
+option Amazoid.StartingReputation
+{
+    type = integer,
+    min = -100,
+    max = 100,
+    default = 0,
+    page = Amazoid,
+    translation = Amazoid_StartingReputation,
+}
+
+option Amazoid.MissionsEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_MissionsEnabled,
+}
+
+option Amazoid.CollectionMissionsEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_CollectionMissionsEnabled,
+}
+
+option Amazoid.EliminationMissionsEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_EliminationMissionsEnabled,
+}
+
+option Amazoid.ScavengerMissionsEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_ScavengerMissionsEnabled,
+}
+
+option Amazoid.TimedDeliveryMissionsEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_TimedDeliveryMissionsEnabled,
+}
+
+option Amazoid.ProtectionMissionsEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_ProtectionMissionsEnabled,
+}
+
+option Amazoid.MissionRewardMultiplier
+{
+    type = double,
+    min = 0.1,
+    max = 5.0,
+    default = 1.0,
+    page = Amazoid,
+    translation = Amazoid_MissionRewardMultiplier,
+}
+
+option Amazoid.GiftsEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_GiftsEnabled,
+}
+
+option Amazoid.GiftCooldownHours
+{
+    type = integer,
+    min = 1,
+    max = 168,
+    default = 24,
+    page = Amazoid,
+    translation = Amazoid_GiftCooldownHours,
+}
+
+option Amazoid.ProtectionDurationMinutes
+{
+    type = integer,
+    min = 5,
+    max = 120,
+    default = 30,
+    page = Amazoid,
+    translation = Amazoid_ProtectionDurationMinutes,
+}
+
+option Amazoid.ProtectionDeviceHealth
+{
+    type = integer,
+    min = 10,
+    max = 500,
+    default = 100,
+    page = Amazoid,
+    translation = Amazoid_ProtectionDeviceHealth,
+}
+
+option Amazoid.BasicCatalogEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_BasicCatalogEnabled,
+}
+
+option Amazoid.ToolsCatalogEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_ToolsCatalogEnabled,
+}
+
+option Amazoid.WeaponsCatalogEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_WeaponsCatalogEnabled,
+}
+
+option Amazoid.MedicalCatalogEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_MedicalCatalogEnabled,
+}
+
+option Amazoid.SeasonalCatalogEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_SeasonalCatalogEnabled,
+}
+
+option Amazoid.BlackMarketCatalogEnabled
+{
+    type = boolean,
+    default = true,
+    page = Amazoid,
+    translation = Amazoid_BlackMarketCatalogEnabled,
+}
+
+option Amazoid.ToolsCatalogReputation
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 10,
+    page = Amazoid,
+    translation = Amazoid_ToolsCatalogReputation,
+}
+
+option Amazoid.WeaponsCatalogReputation
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 25,
+    page = Amazoid,
+    translation = Amazoid_WeaponsCatalogReputation,
+}
+
+option Amazoid.MedicalCatalogReputation
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 25,
+    page = Amazoid,
+    translation = Amazoid_MedicalCatalogReputation,
+}
+
+option Amazoid.SeasonalCatalogReputation
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 35,
+    page = Amazoid,
+    translation = Amazoid_SeasonalCatalogReputation,
+}
+
+option Amazoid.BlackMarketCatalogReputation
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 50,
+    page = Amazoid,
+    translation = Amazoid_BlackMarketCatalogReputation,
+}
