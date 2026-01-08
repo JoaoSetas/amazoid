@@ -76,29 +76,25 @@ function Amazoid.Spawner.processCell(cell)
         end
         
         -- Skip if mailbox already has letter or contract
-        if Amazoid.Mailbox.hasDiscoveryLetter(mailbox) or Amazoid.Mailbox.hasContract(mailbox) then
-            goto continue
-        end
-        
-        local shouldSpawn = false
-        
-        if options.spawnInAllMailboxes then
-            shouldSpawn = true
-        else
-            -- Random chance
-            local roll = ZombRand(100) / 100.0
-            if roll < options.spawnChance then
+        if not (Amazoid.Mailbox.hasDiscoveryLetter(mailbox) or Amazoid.Mailbox.hasContract(mailbox)) then
+            local shouldSpawn = false
+            
+            if options.spawnInAllMailboxes then
                 shouldSpawn = true
+            else
+                -- Random chance
+                local roll = ZombRand(100) / 100.0
+                if roll < options.spawnChance then
+                    shouldSpawn = true
+                end
+            end
+            
+            if shouldSpawn then
+                Amazoid.Mailbox.addDiscoveryLetter(mailbox)
+                lettersSpawned = lettersSpawned + 1
+                print("[Amazoid] Spawned discovery letter at " .. Amazoid.Mailbox.getLocationKey(mailbox))
             end
         end
-        
-        if shouldSpawn then
-            Amazoid.Mailbox.addDiscoveryLetter(mailbox)
-            lettersSpawned = lettersSpawned + 1
-            print("[Amazoid] Spawned discovery letter at " .. Amazoid.Mailbox.getLocationKey(mailbox))
-        end
-        
-        ::continue::
     end
     
     Amazoid.Spawner.markCellProcessed(cellX, cellY)
