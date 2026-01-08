@@ -19,11 +19,6 @@ module Amazoid
         Weight = 0.1,
         WorldStaticModel = Newspaper,
         Tooltip = Amazoid_DiscoveryLetter_Tooltip,
-        
-        /* Custom properties */
-        TeachedRecipes = ,
-        ReplaceOnUse = ,
-        UseDelta = 0,
     }
     
     /**
@@ -192,9 +187,6 @@ module Amazoid
         Weight = 2.0,
         WorldStaticModel = Box,
         Tooltip = Amazoid_DeliveryPackage_Tooltip,
-        
-        /* Cannot be opened */
-        CanBeOpened = false,
     }
     
     /**
@@ -209,11 +201,7 @@ module Amazoid
         Weight = 3.0,
         WorldStaticModel = Radio,
         Tooltip = Amazoid_ProtectionDevice_Tooltip,
-        
-        /* Device properties */
-        TwoHandWeapon = false,
         ConditionMax = 100,
-        ConditionLowerChance = 0,
     }
     
     /**
