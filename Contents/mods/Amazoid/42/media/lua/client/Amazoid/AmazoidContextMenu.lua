@@ -176,8 +176,11 @@ local function onFillInventoryObjectContextMenu(player, context, items)
         if item and item:getFullType() then
             local itemType = item:getFullType()
             
+            -- Letters
             if itemType == "Amazoid.DiscoveryLetter" then
                 context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj, "discovery")
+            elseif itemType == "Amazoid.SignedContract" then
+                context:addOption("Read Contract", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj, "contract")
             elseif itemType == "Amazoid.MissionLetter" then
                 context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj, "mission")
             elseif itemType == "Amazoid.LoreLetter" then
@@ -186,6 +189,19 @@ local function onFillInventoryObjectContextMenu(player, context, items)
                 context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj, "delivery")
             elseif itemType == "Amazoid.GiftLetter" then
                 context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj, "gift")
+            -- Catalogs
+            elseif itemType == "Amazoid.BasicCatalog" then
+                context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj, "basic")
+            elseif itemType == "Amazoid.ToolsCatalog" then
+                context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj, "tools")
+            elseif itemType == "Amazoid.WeaponsCatalog" then
+                context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj, "weapons")
+            elseif itemType == "Amazoid.MedicalCatalog" then
+                context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj, "medical")
+            elseif itemType == "Amazoid.SeasonalCatalog" then
+                context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj, "seasonal")
+            elseif itemType == "Amazoid.BlackMarketCatalog" then
+                context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj, "blackmarket")
             end
         end
     end
@@ -202,6 +218,11 @@ function Amazoid.ContextMenu.onReadInventoryLetter(item, player, letterType)
     if letterType == "discovery" then
         letterData = Amazoid.Letters.getDiscoveryLetter()
         isDiscovery = true
+    elseif letterType == "contract" then
+        letterData = {
+            title = "Signed Contract",
+            content = "This contract binds you to the Amazoid service.\n\nYou have agreed to the Terms of Service and may now access all merchant services through designated mailboxes.\n\nYour reputation will determine your discount rates and access to premium catalogs.\n\nRemember: We always deliver.\n\n- The Merchants"
+        }
     elseif letterType == "delivery" then
         letterData = {
             title = "Delivery Confirmation",
@@ -231,6 +252,18 @@ function Amazoid.ContextMenu.onReadInventoryLetter(item, player, letterType)
         
         AmazoidLetterPanel.showLetter(player, letterData, isDiscovery, mailbox, item)
     end
+end
+
+--- Browse catalog action
+---@param item InventoryItem The catalog item
+---@param player IsoPlayer The player
+---@param catalogType string Type of catalog
+function Amazoid.ContextMenu.onBrowseCatalog(item, player, catalogType)
+    -- For now, just show a message - full catalog UI coming later
+    player:Say("Browsing " .. catalogType .. " catalog...")
+    
+    -- TODO: Open full catalog UI with the appropriate category
+    -- AmazoidCatalogPanel.showCatalog(player, nil, catalogType)
 end
 
 -- Register inventory context menu event

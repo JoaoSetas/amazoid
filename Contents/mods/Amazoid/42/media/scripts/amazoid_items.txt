@@ -11,158 +11,10 @@ module Amazoid
     item DiscoveryLetter
     {
         DisplayCategory = Literature,
-        ItemType = base:literature,
+        ItemType = base:normal,
         Weight = 0.1,
         Icon = Newspaper,
-        StaticModel = Letter,
         WorldStaticModel = NewspaperGround,
-        BoredomChange = -5,
-    }
-    
-    /**
-     * Basic Catalog - Shows items available for purchase
-     */
-    item BasicCatalog
-    {
-        DisplayCategory = Literature,
-        ItemType = base:literature,
-        Weight = 0.2,
-        Icon = Magazine,
-        StaticModel = Magazine,
-        WorldStaticModel = MagazineGround,
-        BoredomChange = -15,
-        StressChange = -5,
-    }
-    
-    /**
-     * Tools Catalog
-     */
-    item ToolsCatalog
-    {
-        DisplayCategory = Literature,
-        ItemType = base:literature,
-        Weight = 0.2,
-        Icon = Magazine,
-        StaticModel = Magazine,
-        WorldStaticModel = MagazineGround,
-        BoredomChange = -15,
-        StressChange = -5,
-    }
-    
-    /**
-     * Weapons Catalog
-     */
-    item WeaponsCatalog
-    {
-        DisplayCategory = Literature,
-        ItemType = base:literature,
-        Weight = 0.2,
-        Icon = Magazine,
-        StaticModel = Magazine,
-        WorldStaticModel = MagazineGround,
-        BoredomChange = -15,
-        StressChange = -5,
-    }
-    
-    /**
-     * Medical Catalog
-     */
-    item MedicalCatalog
-    {
-        DisplayCategory = Literature,
-        ItemType = base:literature,
-        Weight = 0.2,
-        Icon = Magazine,
-        StaticModel = Magazine,
-        WorldStaticModel = MagazineGround,
-        BoredomChange = -15,
-        StressChange = -5,
-    }
-    
-    /**
-     * Seasonal Catalog
-     */
-    item SeasonalCatalog
-    {
-        DisplayCategory = Literature,
-        ItemType = base:literature,
-        Weight = 0.2,
-        Icon = Magazine,
-        StaticModel = Magazine,
-        WorldStaticModel = MagazineGround,
-        BoredomChange = -15,
-        StressChange = -5,
-    }
-    
-    /**
-     * Black Market Catalog
-     */
-    item BlackMarketCatalog
-    {
-        DisplayCategory = Literature,
-        ItemType = base:literature,
-        Weight = 0.2,
-        Icon = Magazine,
-        StaticModel = Magazine,
-        WorldStaticModel = MagazineGround,
-        BoredomChange = -15,
-        StressChange = -5,
-    }
-    
-    /**
-     * Mission Letter - Contains mission details
-     */
-    item MissionLetter
-    {
-        DisplayCategory = Literature,
-        ItemType = base:literature,
-        Weight = 0.1,
-        Icon = Newspaper,
-        StaticModel = Letter,
-        WorldStaticModel = NewspaperGround,
-        BoredomChange = -5,
-    }
-    
-    /**
-     * Lore Letter - Contains backstory and hints
-     */
-    item LoreLetter
-    {
-        DisplayCategory = Literature,
-        ItemType = base:literature,
-        Weight = 0.1,
-        Icon = Newspaper,
-        StaticModel = Letter,
-        WorldStaticModel = NewspaperGround,
-        BoredomChange = -5,
-    }
-    
-    /**
-     * Delivery Note Letter - Confirms order delivery
-     */
-    item DeliveryNoteLetter
-    {
-        DisplayCategory = Literature,
-        ItemType = base:literature,
-        Weight = 0.1,
-        Icon = Newspaper,
-        StaticModel = Letter,
-        WorldStaticModel = NewspaperGround,
-        BoredomChange = -5,
-    }
-    
-    /**
-     * Gift Letter - Accompanies merchant gifts
-     */
-    item GiftLetter
-    {
-        DisplayCategory = Literature,
-        ItemType = base:literature,
-        Weight = 0.1,
-        Icon = Newspaper,
-        StaticModel = Letter,
-        WorldStaticModel = NewspaperGround,
-        BoredomChange = -5,
     }
     
     /**
@@ -171,12 +23,130 @@ module Amazoid
     item SignedContract
     {
         DisplayCategory = Literature,
-        ItemType = base:literature,
+        ItemType = base:normal,
         Weight = 0.1,
         Icon = Newspaper,
-        StaticModel = Letter,
         WorldStaticModel = NewspaperGround,
-        BoredomChange = -5,
+    }
+    
+    /**
+     * Basic Catalog - Shows items available for purchase
+     */
+    item BasicCatalog
+    {
+        DisplayCategory = Literature,
+        ItemType = base:normal,
+        Weight = 0.2,
+        Icon = Magazine,
+        WorldStaticModel = MagazineGround,
+    }
+    
+    /**
+     * Tools Catalog
+     */
+    item ToolsCatalog
+    {
+        DisplayCategory = Literature,
+        ItemType = base:normal,
+        Weight = 0.2,
+        Icon = Magazine,
+        WorldStaticModel = MagazineGround,
+    }
+    
+    /**
+     * Weapons Catalog
+     */
+    item WeaponsCatalog
+    {
+        DisplayCategory = Literature,
+        ItemType = base:normal,
+        Weight = 0.2,
+        Icon = Magazine,
+        WorldStaticModel = MagazineGround,
+    }
+    
+    /**
+     * Medical Catalog
+     */
+    item MedicalCatalog
+    {
+        DisplayCategory = Literature,
+        ItemType = base:normal,
+        Weight = 0.2,
+        Icon = Magazine,
+        WorldStaticModel = MagazineGround,
+    }
+    
+    /**
+     * Seasonal Catalog
+     */
+    item SeasonalCatalog
+    {
+        DisplayCategory = Literature,
+        ItemType = base:normal,
+        Weight = 0.2,
+        Icon = Magazine,
+        WorldStaticModel = MagazineGround,
+    }
+    
+    /**
+     * Black Market Catalog
+     */
+    item BlackMarketCatalog
+    {
+        DisplayCategory = Literature,
+        ItemType = base:normal,
+        Weight = 0.2,
+        Icon = Magazine,
+        WorldStaticModel = MagazineGround,
+    }
+    
+    /**
+     * Mission Letter - Contains mission details
+     */
+    item MissionLetter
+    {
+        DisplayCategory = Literature,
+        ItemType = base:normal,
+        Weight = 0.1,
+        Icon = Newspaper,
+        WorldStaticModel = NewspaperGround,
+    }
+    
+    /**
+     * Lore Letter - Contains backstory and hints
+     */
+    item LoreLetter
+    {
+        DisplayCategory = Literature,
+        ItemType = base:normal,
+        Weight = 0.1,
+        Icon = Newspaper,
+        WorldStaticModel = NewspaperGround,
+    }
+    
+    /**
+     * Delivery Note Letter - Confirms order delivery
+     */
+    item DeliveryNoteLetter
+    {
+        DisplayCategory = Literature,
+        ItemType = base:normal,
+        Weight = 0.1,
+        Icon = Newspaper,
+        WorldStaticModel = NewspaperGround,
+    }
+    
+    /**
+     * Gift Letter - Accompanies merchant gifts
+     */
+    item GiftLetter
+    {
+        DisplayCategory = Literature,
+        ItemType = base:normal,
+        Weight = 0.1,
+        Icon = Newspaper,
+        WorldStaticModel = NewspaperGround,
     }
     
     /**

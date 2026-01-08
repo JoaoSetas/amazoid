@@ -165,7 +165,9 @@ local function onSave()
     Amazoid.Spawner.saveState()
 end
 
--- Register events
+-- Register events (disabled for now to prevent errors during testing)
+-- TODO: Re-enable after item scripts are working properly
+--[[
 Events.LoadGridsquare.Add(function(square)
     if square then
         local cell = square:getCell()
@@ -174,9 +176,10 @@ Events.LoadGridsquare.Add(function(square)
         end
     end
 end)
+]]
 
 Events.OnGameStart.Add(onGameStart)
 Events.OnCreatePlayer.Add(onPlayerCreated)
 Events.OnSave.Add(onSave)
 
-print("[Amazoid] Spawner system loaded")
+print("[Amazoid] Spawner system loaded (auto-spawn disabled for testing)")

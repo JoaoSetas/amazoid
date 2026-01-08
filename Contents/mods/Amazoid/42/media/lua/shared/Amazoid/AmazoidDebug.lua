@@ -13,6 +13,13 @@
         AmazoidDebug.reload()           -- Reload all Amazoid Lua files
 ]]
 
+
+Quick start with AmazoidDebug.test()
+Make code changes in VS Code
+Reload with AmazoidDebug.reload() in console
+Check logs for [Amazoid] messages
+
+
 AmazoidDebug = AmazoidDebug or {}
 
 -- Check if we're in debug mode
@@ -80,14 +87,27 @@ function AmazoidDebug.setRep(value)
     AmazoidDebug.log("Reputation set to: " .. data.reputation)
 end
 
+-- Safe function to add item with error checking
+function AmazoidDebug.safeAddItem(inv, itemType)
+    local item = InventoryItemFactory.CreateItem(itemType)
+    if item then
+        inv:addItem(item)
+        return true
+    else
+        AmazoidDebug.log("WARNING: Could not create item: " .. itemType)
+        return false
+    end
+end
+
 -- Give discovery letter
 function AmazoidDebug.giveLetter()
     local player = getPlayer()
     if not player then return end
     
     local inv = player:getInventory()
-    inv:AddItem("Amazoid.DiscoveryLetter")
-    AmazoidDebug.log("Discovery letter added to inventory")
+    if AmazoidDebug.safeAddItem(inv, "Amazoid.DiscoveryLetter") then
+        AmazoidDebug.log("Discovery letter added to inventory")
+    end
 end
 
 -- Give all catalogs
@@ -96,13 +116,14 @@ function AmazoidDebug.giveAllCatalogs()
     if not player then return end
     
     local inv = player:getInventory()
-    inv:AddItem("Amazoid.BasicCatalog")
-    inv:AddItem("Amazoid.ToolsCatalog")
-    inv:AddItem("Amazoid.WeaponsCatalog")
-    inv:AddItem("Amazoid.MedicalCatalog")
-    inv:AddItem("Amazoid.SeasonalCatalog")
-    inv:AddItem("Amazoid.BlackMarketCatalog")
-    AmazoidDebug.log("All catalogs added to inventory")
+    local count = 0
+    if AmazoidDebug.safeAddItem(inv, "Amazoid.BasicCatalog") then count = count + 1 end
+    if AmazoidDebug.safeAddItem(inv, "Amazoid.ToolsCatalog") then count = count + 1 end
+    if AmazoidDebug.safeAddItem(inv, "Amazoid.WeaponsCatalog") then count = count + 1 end
+    if AmazoidDebug.safeAddItem(inv, "Amazoid.MedicalCatalog") then count = count + 1 end
+    if AmazoidDebug.safeAddItem(inv, "Amazoid.SeasonalCatalog") then count = count + 1 end
+    if AmazoidDebug.safeAddItem(inv, "Amazoid.BlackMarketCatalog") then count = count + 1 end
+    AmazoidDebug.log("Added " .. count .. "/6 catalogs to inventory")
 end
 
 -- Give signed contract
@@ -116,8 +137,11 @@ function AmazoidDebug.giveContract()
     player:getModData().Amazoid = data
     
     local inv = player:getInventory()
-    inv:AddItem("Amazoid.SignedContract")
-    AmazoidDebug.log("Contract signed and added to inventory")
+    if AmazoidDebug.safeAddItem(inv, "Amazoid.SignedContract") then
+        AmazoidDebug.log("Contract signed and added to inventory")
+    else
+        AmazoidDebug.log("Contract signed (item creation failed)")
+    end
 end
 
 -- List pending orders
@@ -220,8 +244,9 @@ function AmazoidDebug.spawnDevice()
     if not player then return end
     
     local inv = player:getInventory()
-    inv:AddItem("Amazoid.ProtectionDevice")
-    AmazoidDebug.log("Protection device added to inventory")
+    if AmazoidDebug.safeAddItem(inv, "Amazoid.ProtectionDevice") then
+        AmazoidDebug.log("Protection device added to inventory")
+    end
 end
 
 -- Dump a table for inspection

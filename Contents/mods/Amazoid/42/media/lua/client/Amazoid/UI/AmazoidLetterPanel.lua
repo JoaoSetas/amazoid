@@ -107,17 +107,29 @@ function AmazoidLetterPanel:onSignContract()
             Amazoid.Mailbox.removeDiscoveryLetter(self.mailbox)
         end
         
-        -- Remove the letter item from inventory
+        -- Remove the discovery letter from inventory and add signed contract
         if self.letterItem then
-            self.player:getInventory():Remove(self.letterItem)
+            local inv = self.player:getInventory()
+            inv:Remove(self.letterItem)
+            
+            -- Give signed contract to player
+            local signedContract = InventoryItemFactory.CreateItem("Amazoid.SignedContract")
+            if signedContract then
+                inv:addItem(signedContract)
+                self.player:Say("Contract signed!")
+            end
         end
+        
+        -- Close this panel first
+        self:close()
         
         -- Show welcome letter
         local welcomeLetter = Amazoid.Letters.Welcome
         AmazoidLetterPanel.showLetter(self.player, welcomeLetter, false, nil, nil)
+        return
     end
     
-    self:onClose()
+    self:close()
 end
 
 function AmazoidLetterPanel:prerender()

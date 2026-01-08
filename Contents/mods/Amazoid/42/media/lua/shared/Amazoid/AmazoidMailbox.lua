@@ -179,7 +179,12 @@ function Amazoid.Mailbox.addDiscoveryLetter(object)
     -- Also add the physical letter item to the container
     local container = object:getContainer()
     if container then
-        container:AddItem("Amazoid.DiscoveryLetter")
+        local item = InventoryItemFactory.CreateItem("Amazoid.DiscoveryLetter")
+        if item then
+            container:addItem(item)
+        else
+            print("[Amazoid] Warning: Could not create DiscoveryLetter item")
+        end
     end
     
     print("[Amazoid] Discovery letter added to mailbox")
