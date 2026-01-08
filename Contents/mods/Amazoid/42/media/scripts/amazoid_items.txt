@@ -1,8 +1,6 @@
 /**
  * Amazoid - Mysterious Mailbox Merchant
- * Item Definitions
- * 
- * This file defines all custom items for the Amazoid mod.
+ * Item Definitions for Build 42
  */
 
 module Amazoid
@@ -13,12 +11,12 @@ module Amazoid
     item DiscoveryLetter
     {
         DisplayCategory = Literature,
-        Type = Literature,
-        DisplayName = Mysterious Letter,
-        Icon = Newspaper,
+        ItemType = base:literature,
         Weight = 0.1,
-        WorldStaticModel = Newspaper,
-        Tooltip = Amazoid_DiscoveryLetter_Tooltip,
+        Icon = Newspaper,
+        StaticModel = Letter,
+        WorldStaticModel = NewspaperGround,
+        BoredomChange = -5,
     }
     
     /**
@@ -27,12 +25,13 @@ module Amazoid
     item BasicCatalog
     {
         DisplayCategory = Literature,
-        Type = Literature,
-        DisplayName = Amazoid Basic Catalog,
-        Icon = Magazine,
+        ItemType = base:literature,
         Weight = 0.2,
-        WorldStaticModel = Magazine,
-        Tooltip = Amazoid_BasicCatalog_Tooltip,
+        Icon = Magazine,
+        StaticModel = Magazine,
+        WorldStaticModel = MagazineGround,
+        BoredomChange = -15,
+        StressChange = -5,
     }
     
     /**
@@ -41,12 +40,13 @@ module Amazoid
     item ToolsCatalog
     {
         DisplayCategory = Literature,
-        Type = Literature,
-        DisplayName = Amazoid Tools Catalog,
-        Icon = Magazine,
+        ItemType = base:literature,
         Weight = 0.2,
-        WorldStaticModel = Magazine,
-        Tooltip = Amazoid_ToolsCatalog_Tooltip,
+        Icon = Magazine,
+        StaticModel = Magazine,
+        WorldStaticModel = MagazineGround,
+        BoredomChange = -15,
+        StressChange = -5,
     }
     
     /**
@@ -55,12 +55,13 @@ module Amazoid
     item WeaponsCatalog
     {
         DisplayCategory = Literature,
-        Type = Literature,
-        DisplayName = Amazoid Weapons Catalog,
-        Icon = Magazine,
+        ItemType = base:literature,
         Weight = 0.2,
-        WorldStaticModel = Magazine,
-        Tooltip = Amazoid_WeaponsCatalog_Tooltip,
+        Icon = Magazine,
+        StaticModel = Magazine,
+        WorldStaticModel = MagazineGround,
+        BoredomChange = -15,
+        StressChange = -5,
     }
     
     /**
@@ -69,12 +70,13 @@ module Amazoid
     item MedicalCatalog
     {
         DisplayCategory = Literature,
-        Type = Literature,
-        DisplayName = Amazoid Medical Catalog,
-        Icon = Magazine,
+        ItemType = base:literature,
         Weight = 0.2,
-        WorldStaticModel = Magazine,
-        Tooltip = Amazoid_MedicalCatalog_Tooltip,
+        Icon = Magazine,
+        StaticModel = Magazine,
+        WorldStaticModel = MagazineGround,
+        BoredomChange = -15,
+        StressChange = -5,
     }
     
     /**
@@ -83,12 +85,13 @@ module Amazoid
     item SeasonalCatalog
     {
         DisplayCategory = Literature,
-        Type = Literature,
-        DisplayName = Amazoid Seasonal Catalog,
-        Icon = Magazine,
+        ItemType = base:literature,
         Weight = 0.2,
-        WorldStaticModel = Magazine,
-        Tooltip = Amazoid_SeasonalCatalog_Tooltip,
+        Icon = Magazine,
+        StaticModel = Magazine,
+        WorldStaticModel = MagazineGround,
+        BoredomChange = -15,
+        StressChange = -5,
     }
     
     /**
@@ -97,12 +100,13 @@ module Amazoid
     item BlackMarketCatalog
     {
         DisplayCategory = Literature,
-        Type = Literature,
-        DisplayName = Amazoid Black Market Catalog,
-        Icon = Magazine,
+        ItemType = base:literature,
         Weight = 0.2,
-        WorldStaticModel = Magazine,
-        Tooltip = Amazoid_BlackMarketCatalog_Tooltip,
+        Icon = Magazine,
+        StaticModel = Magazine,
+        WorldStaticModel = MagazineGround,
+        BoredomChange = -15,
+        StressChange = -5,
     }
     
     /**
@@ -111,12 +115,12 @@ module Amazoid
     item MissionLetter
     {
         DisplayCategory = Literature,
-        Type = Literature,
-        DisplayName = Mission Letter,
-        Icon = Newspaper,
+        ItemType = base:literature,
         Weight = 0.1,
-        WorldStaticModel = Newspaper,
-        Tooltip = Amazoid_MissionLetter_Tooltip,
+        Icon = Newspaper,
+        StaticModel = Letter,
+        WorldStaticModel = NewspaperGround,
+        BoredomChange = -5,
     }
     
     /**
@@ -125,12 +129,12 @@ module Amazoid
     item LoreLetter
     {
         DisplayCategory = Literature,
-        Type = Literature,
-        DisplayName = Personal Letter,
-        Icon = Newspaper,
+        ItemType = base:literature,
         Weight = 0.1,
-        WorldStaticModel = Newspaper,
-        Tooltip = Amazoid_LoreLetter_Tooltip,
+        Icon = Newspaper,
+        StaticModel = Letter,
+        WorldStaticModel = NewspaperGround,
+        BoredomChange = -5,
     }
     
     /**
@@ -139,12 +143,12 @@ module Amazoid
     item DeliveryNoteLetter
     {
         DisplayCategory = Literature,
-        Type = Literature,
-        DisplayName = Delivery Confirmation,
-        Icon = Newspaper,
+        ItemType = base:literature,
         Weight = 0.1,
-        WorldStaticModel = Newspaper,
-        Tooltip = Amazoid_DeliveryNoteLetter_Tooltip,
+        Icon = Newspaper,
+        StaticModel = Letter,
+        WorldStaticModel = NewspaperGround,
+        BoredomChange = -5,
     }
     
     /**
@@ -153,12 +157,12 @@ module Amazoid
     item GiftLetter
     {
         DisplayCategory = Literature,
-        Type = Literature,
-        DisplayName = Gift Note,
-        Icon = Newspaper,
+        ItemType = base:literature,
         Weight = 0.1,
-        WorldStaticModel = Newspaper,
-        Tooltip = Amazoid_GiftLetter_Tooltip,
+        Icon = Newspaper,
+        StaticModel = Letter,
+        WorldStaticModel = NewspaperGround,
+        BoredomChange = -5,
     }
     
     /**
@@ -167,12 +171,12 @@ module Amazoid
     item SignedContract
     {
         DisplayCategory = Literature,
-        Type = Literature,
-        DisplayName = Amazoid Contract,
-        Icon = Newspaper,
+        ItemType = base:literature,
         Weight = 0.1,
-        WorldStaticModel = Newspaper,
-        Tooltip = Amazoid_SignedContract_Tooltip,
+        Icon = Newspaper,
+        StaticModel = Letter,
+        WorldStaticModel = NewspaperGround,
+        BoredomChange = -5,
     }
     
     /**
@@ -181,12 +185,10 @@ module Amazoid
     item DeliveryPackage
     {
         DisplayCategory = Item,
-        Type = Normal,
-        DisplayName = Sealed Package,
-        Icon = Box,
+        ItemType = base:normal,
         Weight = 2.0,
-        WorldStaticModel = Box,
-        Tooltip = Amazoid_DeliveryPackage_Tooltip,
+        Icon = Box,
+        WorldStaticModel = BoxCardboard_Ground,
     }
     
     /**
@@ -195,13 +197,10 @@ module Amazoid
     item ProtectionDevice
     {
         DisplayCategory = Item,
-        Type = Normal,
-        DisplayName = Strange Device,
-        Icon = Radio,
+        ItemType = base:normal,
         Weight = 3.0,
-        WorldStaticModel = Radio,
-        Tooltip = Amazoid_ProtectionDevice_Tooltip,
-        ConditionMax = 100,
+        Icon = Radio,
+        WorldStaticModel = PortableRadio_Ground,
     }
     
     /**
@@ -209,13 +208,11 @@ module Amazoid
      */
     item LargeMailboxKit
     {
-        DisplayCategory = Item,
-        Type = Normal,
-        DisplayName = Large Mailbox Kit,
-        Icon = Box,
+        DisplayCategory = Material,
+        ItemType = base:normal,
         Weight = 5.0,
-        WorldStaticModel = Box,
-        Tooltip = Amazoid_LargeMailboxKit_Tooltip,
+        Icon = Box,
+        WorldStaticModel = BoxCardboard_Ground,
     }
     
     /**
@@ -223,12 +220,10 @@ module Amazoid
      */
     item DeliveryCrateKit
     {
-        DisplayCategory = Item,
-        Type = Normal,
-        DisplayName = Delivery Crate Kit,
-        Icon = Crate,
+        DisplayCategory = Material,
+        ItemType = base:normal,
         Weight = 10.0,
-        WorldStaticModel = Crate,
-        Tooltip = Amazoid_DeliveryCrateKit_Tooltip,
+        Icon = Crate,
+        WorldStaticModel = WoodenCrate_Ground,
     }
 }

@@ -1,93 +1,93 @@
 /**
  * Amazoid - Mysterious Mailbox Merchant
- * Recipe Definitions
- * 
- * This file defines crafting recipes for Amazoid items.
+ * Crafting Recipes for Build 42
  */
 
 module Amazoid
 {
-    /**
-     * Craft Large Mailbox from kit
-     * Requires Carpentry level 4
-     */
-    recipe Build Large Mailbox
+    /* Craft Large Mailbox from kit - requires Carpentry 4 */
+    craftRecipe BuildLargeMailbox
     {
-        LargeMailboxKit,
-        Hammer,
-        Nails = 10,
-        Plank = 4,
-        
-        Result: LargeMailbox,
-        Time: 120.0,
-        Category: Carpentry,
-        OnCreate: Amazoid.OnCraftLargeMailbox,
-        
-        SkillRequired: Carpentry = 4,
-        
-        NeedToBeLearn: false,
+        time = 120,
+        category = Carpentry,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Carpentry:4,
+        xpAward = Carpentry:25,
+        inputs
+        {
+            item 1 [Amazoid.LargeMailboxKit],
+            item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 10 [Base.Nails],
+            item 4 [Base.Plank],
+        }
+        outputs
+        {
+            item 1 [Amazoid.LargeMailboxKit],
+        }
     }
     
-    /**
-     * Craft Delivery Crate from kit
-     * Requires Carpentry level 6
-     */
-    recipe Build Delivery Crate
+    /* Craft Delivery Crate from kit - requires Carpentry 6 */
+    craftRecipe BuildDeliveryCrate
     {
-        DeliveryCrateKit,
-        Hammer,
-        Nails = 20,
-        Plank = 8,
-        MetalBar = 2,
-        
-        Result: DeliveryCrate,
-        Time: 180.0,
-        Category: Carpentry,
-        OnCreate: Amazoid.OnCraftDeliveryCrate,
-        
-        SkillRequired: Carpentry = 6,
-        
-        NeedToBeLearn: false,
+        time = 180,
+        category = Carpentry,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Carpentry:6,
+        xpAward = Carpentry:35,
+        inputs
+        {
+            item 1 [Amazoid.DeliveryCrateKit],
+            item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 20 [Base.Nails],
+            item 8 [Base.Plank],
+            item 2 [Base.MetalBar],
+        }
+        outputs
+        {
+            item 1 [Amazoid.DeliveryCrateKit],
+        }
     }
     
-    /**
-     * Craft Large Mailbox Kit (alternative without finding one)
-     * Requires Metalworking level 3
-     */
-    recipe Assemble Large Mailbox Kit
+    /* Assemble Large Mailbox Kit - requires Metalworking 3 */
+    craftRecipe AssembleLargeMailboxKit
     {
-        SheetMetal = 2,
-        MetalPipe,
-        Screws = 5,
-        Screwdriver,
-        
-        Result: LargeMailboxKit,
-        Time: 90.0,
-        Category: Metalworking,
-        
-        SkillRequired: Metalworking = 3,
-        
-        NeedToBeLearn: false,
+        time = 90,
+        category = Metalworking,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Metalworking:3,
+        xpAward = Metalworking:20,
+        inputs
+        {
+            item 2 [Base.SheetMetal],
+            item 1 [Base.MetalPipe],
+            item 5 [Base.Screws],
+            item 1 tags[base:screwdriver] mode:keep flags[Prop1;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 [Amazoid.LargeMailboxKit],
+        }
     }
     
-    /**
-     * Craft Delivery Crate Kit (alternative without finding one)
-     * Requires Metalworking level 5
-     */
-    recipe Assemble Delivery Crate Kit
+    /* Assemble Delivery Crate Kit - requires Metalworking 5 */
+    craftRecipe AssembleDeliveryCrateKit
     {
-        SheetMetal = 4,
-        MetalBar = 3,
-        Screws = 10,
-        Hinge = 2,
-        Screwdriver,
-        
-        Result: DeliveryCrateKit,
-        Time: 150.0,
-        Category: Metalworking,
-        
-        SkillRequired: Metalworking = 5,
-        
-        NeedToBeLearn: false,
+        time = 150,
+        category = Metalworking,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Metalworking:5,
+        xpAward = Metalworking:30,
+        inputs
+        {
+            item 4 [Base.SheetMetal],
+            item 3 [Base.MetalBar],
+            item 10 [Base.Screws],
+            item 2 [Base.Hinge],
+            item 1 tags[base:screwdriver] mode:keep flags[Prop1;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 [Amazoid.DeliveryCrateKit],
+        }
     }
 }
