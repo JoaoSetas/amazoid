@@ -1,7 +1,7 @@
 --[[
     Amazoid - Mysterious Mailbox Merchant
     Sandbox Options
-    
+
     This file defines sandbox/server options for the mod.
 ]]
 
@@ -12,47 +12,39 @@ if not SandboxVars.Amazoid then SandboxVars.Amazoid = {} end
 
 -- Default values (will be overridden by sandbox options if set)
 local defaults = {
-    -- Letter spawning
-    LetterSpawnChance = 0.1,        -- 10% chance per mailbox
-    SpawnInStartingHouse = true,     -- Always spawn in starting house
-    SpawnInAllMailboxes = false,     -- Spawn in every mailbox
-    MaxLettersPerCell = 1,           -- Max letters per cell
-    
+    -- First contact
+    FirstContactDays = 3, -- Days within which first contact will happen
+
     -- Economy
-    PriceMultiplier = 1.0,           -- Multiplier for all prices
-    DeliveryTimeMultiplier = 1.0,    -- Multiplier for delivery times
-    
+    PriceMultiplier = 1.0,        -- Multiplier for all prices
+    DeliveryTimeMultiplier = 1.0, -- Multiplier for delivery times
+    MerchantVisitInterval = 1,    -- Hours between merchant visits to check mailboxes
+
     -- Reputation
-    ReputationGainMultiplier = 1.0,  -- Multiplier for reputation gains
-    ReputationLossMultiplier = 1.0,  -- Multiplier for reputation losses
-    StartingReputation = 0,          -- Starting reputation value
-    
-    -- Missions
-    MissionsEnabled = true,          -- Enable mission system
+    ReputationGainMultiplier = 1.0, -- Multiplier for reputation gains
+    ReputationLossMultiplier = 1.0, -- Multiplier for reputation losses
+}
+
+-- Hardcoded values (not configurable)
+local hardcoded = {
+    StartingReputation = 0,
+    MissionsEnabled = true,
     CollectionMissionsEnabled = true,
     EliminationMissionsEnabled = true,
     ScavengerMissionsEnabled = true,
     TimedDeliveryMissionsEnabled = true,
     ProtectionMissionsEnabled = true,
-    MissionRewardMultiplier = 1.0,   -- Multiplier for mission rewards
-    
-    -- Gifts
-    GiftsEnabled = true,             -- Enable gift system
-    GiftCooldownHours = 24,          -- Hours between gifts
-    
-    -- Protection missions
-    ProtectionDurationMinutes = 30,  -- Duration of protection missions
-    ProtectionDeviceHealth = 100,    -- Starting health of device
-    
-    -- Catalogs
+    MissionRewardMultiplier = 1.0,
+    GiftsEnabled = true,
+    GiftCooldownHours = 24,
+    ProtectionDurationMinutes = 30,
+    ProtectionDeviceHealth = 100,
     BasicCatalogEnabled = true,
     ToolsCatalogEnabled = true,
     WeaponsCatalogEnabled = true,
     MedicalCatalogEnabled = true,
     SeasonalCatalogEnabled = true,
     BlackMarketCatalogEnabled = true,
-    
-    -- Reputation thresholds (can be adjusted)
     ToolsCatalogReputation = 10,
     WeaponsCatalogReputation = 25,
     MedicalCatalogReputation = 25,
@@ -67,10 +59,15 @@ for key, value in pairs(defaults) do
     end
 end
 
---- Get a sandbox option value
+--- Get a sandbox option value (checks sandbox options first, then hardcoded values)
 ---@param key string Option key
 ---@return any Option value
 function Amazoid.getSandboxOption(key)
+    -- Check hardcoded values first (these are not configurable)
+    if hardcoded[key] ~= nil then
+        return hardcoded[key]
+    end
+    -- Check sandbox options
     if SandboxVars and SandboxVars.Amazoid and SandboxVars.Amazoid[key] ~= nil then
         return SandboxVars.Amazoid[key]
     end
@@ -116,7 +113,7 @@ function Amazoid.isMissionTypeEnabled(missionType)
     if not Amazoid.getSandboxOption("MissionsEnabled") then
         return false
     end
-    
+
     if missionType == Amazoid.MissionTypes.COLLECTION then
         return Amazoid.getSandboxOption("CollectionMissionsEnabled")
     elseif missionType == Amazoid.MissionTypes.ELIMINATION then
@@ -128,7 +125,7 @@ function Amazoid.isMissionTypeEnabled(missionType)
     elseif missionType == Amazoid.MissionTypes.PROTECTION then
         return Amazoid.getSandboxOption("ProtectionMissionsEnabled")
     end
-    
+
     return true
 end
 
@@ -149,7 +146,7 @@ function Amazoid.isCatalogEnabled(catalogType)
     elseif catalogType == Amazoid.CatalogCategories.BLACKMARKET then
         return Amazoid.getSandboxOption("BlackMarketCatalogEnabled")
     end
-    
+
     return true
 end
 
@@ -170,7 +167,7 @@ function Amazoid.getCatalogReputationThreshold(catalogType)
     elseif catalogType == Amazoid.CatalogCategories.BLACKMARKET then
         return Amazoid.getSandboxOption("BlackMarketCatalogReputation")
     end
-    
+
     return 0
 end
 

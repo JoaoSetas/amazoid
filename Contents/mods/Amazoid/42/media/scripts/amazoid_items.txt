@@ -7,158 +7,193 @@ module Amazoid
 {
     /**
      * Discovery Letter - Found in mailboxes, starts the Amazoid service
+     * Icon: Same as Base.GenericMail (Paperwork5)
      */
     item DiscoveryLetter
     {
         DisplayCategory = Literature,
+        DisplayName = Amazoid Discovery Letter,
         ItemType = base:normal,
-        Weight = 0.1,
-        Icon = Newspaper,
-        WorldStaticModel = NewspaperGround,
+        Weight = 0.01,
+        Icon = Paperwork5,
+        WorldStaticModel = Paperwork5,
     }
     
     /**
      * Signed Contract - Proof of service agreement
+     * Icon: Same as Base.OfficialDocument (LiquorLicense)
      */
     item SignedContract
     {
         DisplayCategory = Literature,
+        DisplayName = Amazoid Signed Contract,
         ItemType = base:normal,
-        Weight = 0.1,
-        Icon = Newspaper,
-        WorldStaticModel = NewspaperGround,
+        Weight = 0.01,
+        Icon = LiquorLicense,
+        WorldStaticModel = LiquorLicense,
     }
     
     /**
-     * Basic Catalog - Shows items available for purchase
+     * Catalog - Magazine-style ordering catalog with volumes
+     * There is only one catalog item type, editions are stored in modData
+     * Icon: Same as Base.Catalog (Catalogue)
      */
-    item BasicCatalog
+    item Catalog
     {
         DisplayCategory = Literature,
+        DisplayName = Amazoid Catalog,
         ItemType = base:normal,
-        Weight = 0.2,
-        Icon = Magazine,
-        WorldStaticModel = MagazineGround,
-    }
-    
-    /**
-     * Tools Catalog
-     */
-    item ToolsCatalog
-    {
-        DisplayCategory = Literature,
-        ItemType = base:normal,
-        Weight = 0.2,
-        Icon = Magazine,
-        WorldStaticModel = MagazineGround,
-    }
-    
-    /**
-     * Weapons Catalog
-     */
-    item WeaponsCatalog
-    {
-        DisplayCategory = Literature,
-        ItemType = base:normal,
-        Weight = 0.2,
-        Icon = Magazine,
-        WorldStaticModel = MagazineGround,
-    }
-    
-    /**
-     * Medical Catalog
-     */
-    item MedicalCatalog
-    {
-        DisplayCategory = Literature,
-        ItemType = base:normal,
-        Weight = 0.2,
-        Icon = Magazine,
-        WorldStaticModel = MagazineGround,
-    }
-    
-    /**
-     * Seasonal Catalog
-     */
-    item SeasonalCatalog
-    {
-        DisplayCategory = Literature,
-        ItemType = base:normal,
-        Weight = 0.2,
-        Icon = Magazine,
-        WorldStaticModel = MagazineGround,
-    }
-    
-    /**
-     * Black Market Catalog
-     */
-    item BlackMarketCatalog
-    {
-        DisplayCategory = Literature,
-        ItemType = base:normal,
-        Weight = 0.2,
-        Icon = Magazine,
-        WorldStaticModel = MagazineGround,
+        Weight = 0.05,
+        Icon = Catalogue,
+        WorldStaticModel = Catalogue,
     }
     
     /**
      * Mission Letter - Contains mission details
+     * Icon: Same as Base.GenericMail (Paperwork5)
      */
     item MissionLetter
     {
         DisplayCategory = Literature,
+        DisplayName = Amazoid Mission Letter,
         ItemType = base:normal,
-        Weight = 0.1,
-        Icon = Newspaper,
-        WorldStaticModel = NewspaperGround,
+        Weight = 0.01,
+        Icon = Paperwork5,
+        WorldStaticModel = Paperwork5,
     }
     
     /**
      * Lore Letter - Contains backstory and hints
+     * Icon: Same as Base.GenericMail (Paperwork5)
      */
     item LoreLetter
     {
         DisplayCategory = Literature,
+        DisplayName = Amazoid Lore Letter,
         ItemType = base:normal,
-        Weight = 0.1,
-        Icon = Newspaper,
-        WorldStaticModel = NewspaperGround,
+        Weight = 0.01,
+        Icon = Paperwork5,
+        WorldStaticModel = Paperwork5,
     }
     
     /**
      * Delivery Note Letter - Confirms order delivery
+     * Icon: Same as Base.GenericMail (Paperwork5)
      */
     item DeliveryNoteLetter
     {
         DisplayCategory = Literature,
+        DisplayName = Amazoid Delivery Note,
         ItemType = base:normal,
-        Weight = 0.1,
-        Icon = Newspaper,
-        WorldStaticModel = NewspaperGround,
+        Weight = 0.01,
+        Icon = Paperwork5,
+        WorldStaticModel = Paperwork5,
     }
     
     /**
      * Gift Letter - Accompanies merchant gifts
+     * Icon: Same as Base.GenericMail (Paperwork5)
      */
     item GiftLetter
     {
         DisplayCategory = Literature,
+        DisplayName = Amazoid Gift Letter,
         ItemType = base:normal,
-        Weight = 0.1,
-        Icon = Newspaper,
-        WorldStaticModel = NewspaperGround,
+        Weight = 0.01,
+        Icon = Paperwork5,
+        WorldStaticModel = Paperwork5,
     }
     
     /**
-     * Delivery Package - Used for timed delivery missions
+     * Merchant Letter - General letters from the merchant
+     * Icon: Same as Base.GenericMail (Paperwork5)
      */
-    item DeliveryPackage
+    item MerchantLetter
     {
-        DisplayCategory = Item,
+        DisplayCategory = Literature,
+        DisplayName = Amazoid Merchant Letter,
         ItemType = base:normal,
+        Weight = 0.01,
+        Icon = Paperwork5,
+        WorldStaticModel = Paperwork5,
+    }
+    
+    /**
+     * Order Receipt - Confirms order has been placed
+     * Icon: Same as Base.Receipt
+     */
+    item OrderReceipt
+    {
+        DisplayCategory = Literature,
+        DisplayName = Amazoid Order Receipt,
+        ItemType = base:normal,
+        Weight = 0.01,
+        Icon = Receipt,
+        WorldStaticModel = Receipt,
+    }
+    
+    /**
+     * Small Delivery Package - Container for small orders (up to 5 weight)
+     */
+    item DeliveryPackageSmall
+    {
+        DisplayCategory = Container,
+        DisplayName = Amazoid Small Package,
+        ItemType = base:container,
+        Weight = 0.3,
+        WeightReduction = 0,
+        Capacity = 5,
+        Icon = Parcel_Small_Food,
+        WorldStaticModel = Parcel_Food_Small,
+        CanBeEquippedAsSecondary = false,
+    }
+    
+    /**
+     * Medium Delivery Package - Container for medium orders (up to 15 weight)
+     */
+    item DeliveryPackageMedium
+    {
+        DisplayCategory = Container,
+        DisplayName = Amazoid Medium Package,
+        ItemType = base:container,
+        Weight = 0.5,
+        WeightReduction = 0,
+        Capacity = 15,
+        Icon = Parcel_Medium_Food,
+        WorldStaticModel = Parcel_Food_Medium,
+        CanBeEquippedAsSecondary = false,
+    }
+    
+    /**
+     * Large Delivery Package - Container for large orders (up to 30 weight)
+     */
+    item DeliveryPackageLarge
+    {
+        DisplayCategory = Container,
+        DisplayName = Amazoid Large Package,
+        ItemType = base:container,
+        Weight = 1.0,
+        WeightReduction = 0,
+        Capacity = 30,
+        Icon = Parcel_Large_Food,
+        WorldStaticModel = Parcel_Food_Large,
+        CanBeEquippedAsSecondary = false,
+    }
+    
+    /**
+     * Crate Delivery - Container for very large orders (up to 50 weight)
+     */
+    item DeliveryCrate
+    {
+        DisplayCategory = Container,
+        DisplayName = Amazoid Delivery Crate,
+        ItemType = base:container,
         Weight = 2.0,
-        Icon = Box,
-        WorldStaticModel = BoxCardboard_Ground,
+        WeightReduction = 0,
+        Capacity = 50,
+        Icon = Crate,
+        WorldStaticModel = Crate_Ground,
+        CanBeEquippedAsSecondary = false,
     }
     
     /**
@@ -167,33 +202,10 @@ module Amazoid
     item ProtectionDevice
     {
         DisplayCategory = Item,
+        DisplayName = Amazoid Protection Device,
         ItemType = base:normal,
         Weight = 3.0,
         Icon = Radio,
-        WorldStaticModel = PortableRadio_Ground,
-    }
-    
-    /**
-     * Large Mailbox Kit - For building large mailboxes
-     */
-    item LargeMailboxKit
-    {
-        DisplayCategory = Material,
-        ItemType = base:normal,
-        Weight = 5.0,
-        Icon = Box,
-        WorldStaticModel = BoxCardboard_Ground,
-    }
-    
-    /**
-     * Delivery Crate Kit - For building delivery crates
-     */
-    item DeliveryCrateKit
-    {
-        DisplayCategory = Material,
-        ItemType = base:normal,
-        Weight = 10.0,
-        Icon = Crate,
-        WorldStaticModel = WoodenCrate_Ground,
+        WorldStaticModel = RadioBlack_Ground,
     }
 }

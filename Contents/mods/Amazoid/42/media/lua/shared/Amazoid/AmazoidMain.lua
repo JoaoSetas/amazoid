@@ -1,7 +1,7 @@
 --[[
     Amazoid - Mysterious Mailbox Merchant
     Main Entry Point
-    
+
     This file loads all Amazoid modules in the correct order.
 ]]
 
@@ -20,10 +20,13 @@ Amazoid.VERSION = AMAZOID_VERSION
 -- Load order matters - dependencies first
 require "Amazoid/AmazoidData"
 require "Amazoid/AmazoidSandbox"
+require "Amazoid/AmazoidEvents"
 require "Amazoid/AmazoidUtils"
 require "Amazoid/AmazoidMailbox"
 require "Amazoid/AmazoidLetters"
 require "Amazoid/AmazoidItems"
+require "Amazoid/AmazoidCatalogs"
+require "Amazoid/AmazoidDebug"
 
 print("[Amazoid] Core modules loaded")
 print("[Amazoid] Initialization complete!")

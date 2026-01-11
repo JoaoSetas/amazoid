@@ -1,7 +1,7 @@
 --[[
     Amazoid - Mysterious Mailbox Merchant
     Utility Functions
-    
+
     This file contains shared utility functions.
 ]]
 
@@ -22,7 +22,7 @@ function Amazoid.Utils.canAccessCatalog(reputation, catalogType)
         [Amazoid.CatalogCategories.SEASONAL] = Amazoid.Reputation.CATALOG_SEASONAL,
         [Amazoid.CatalogCategories.BLACKMARKET] = Amazoid.Reputation.CATALOG_BLACKMARKET,
     }
-    
+
     local required = thresholds[catalogType] or 0
     return reputation >= required
 end
@@ -39,22 +39,6 @@ function Amazoid.Utils.calculateDiscount(reputation)
     return math.min(discount, 0.3)
 end
 
---- Calculate reputation change from payment
----@param expectedPrice number Expected price
----@param paidAmount number Amount paid
----@return number Reputation change
-function Amazoid.Utils.calculatePaymentReputation(expectedPrice, paidAmount)
-    local difference = paidAmount - expectedPrice
-    
-    if difference >= 0 then
-        -- Overpaid - gain reputation (capped at 5)
-        return math.min(difference * Amazoid.Reputation.OVERPAY_BONUS, 5)
-    else
-        -- Underpaid - lose reputation
-        return difference * Amazoid.Reputation.UNDERPAY_PENALTY
-    end
-end
-
 --- Get current season based on game time
 ---@return string Season from Amazoid.Seasons
 function Amazoid.Utils.getCurrentSeason()
@@ -62,9 +46,9 @@ function Amazoid.Utils.getCurrentSeason()
     if not gameTime then
         return Amazoid.Seasons.SUMMER
     end
-    
+
     local month = gameTime:getMonth() + 1 -- Lua is 1-indexed
-    
+
     if month >= 3 and month <= 5 then
         return Amazoid.Seasons.SPRING
     elseif month >= 6 and month <= 8 then
@@ -76,45 +60,46 @@ function Amazoid.Utils.getCurrentSeason()
     end
 end
 
---- Calculate delivery time based on reputation and rush order
+--- Calculate delivery time based on reputation, item count, and add randomness
 ---@param reputation number Current reputation
 ---@param isRush boolean Is this a rush order
----@return number Delivery time in game hours
-function Amazoid.Utils.calculateDeliveryTime(reputation, isRush)
-    -- Base time decreases slightly with reputation
-    local repBonus = (reputation / Amazoid.Reputation.MAX) * 0.2 -- Up to 20% faster
+---@param itemCount number Optional - number of items in the order
+---@return number Delivery time in game hours (estimate - actual may vary)
+function Amazoid.Utils.calculateDeliveryTime(reputation, isRush, itemCount)
+    itemCount = itemCount or 1
+
+    -- Base time range (6-24 hours)
     local baseTime = ZombRand(Amazoid.DeliveryTime.MIN, Amazoid.DeliveryTime.MAX + 1)
-    
-    local time = baseTime * (1 - repBonus)
-    
+
+    -- Reputation bonus: up to 30% faster at max reputation
+    local repBonus = (reputation / Amazoid.Reputation.MAX) * 0.3
+
+    -- Item count penalty: each additional item adds 0.5-1.5 hours
+    local itemPenalty = 0
+    if itemCount > 1 then
+        itemPenalty = (itemCount - 1) * (0.5 + ZombRand(0, 11) / 10) -- 0.5 to 1.5 per item
+    end
+
+    -- Calculate base delivery time
+    local time = baseTime * (1 - repBonus) + itemPenalty
+
     if isRush then
         time = time * Amazoid.DeliveryTime.RUSH_MULTIPLIER
     end
-    
-    return math.max(math.floor(time), 1)
+
+    -- Round to nearest hour for the estimate shown to player
+    return math.max(math.floor(time + 0.5), 1)
 end
 
---- Check if an item fits in a mailbox type
----@param item InventoryItem The item to check
----@param mailboxType table Mailbox type from Amazoid.MailboxTypes
----@return boolean
-function Amazoid.Utils.itemFitsInMailbox(item, mailboxType)
-    if not item or not mailboxType then
-        return false
-    end
-    
-    local weight = item:getWeight()
-    -- TODO: Implement size checking based on item categories
-    
-    return weight <= mailboxType.maxWeight
-end
-
---- Generate a random mission based on reputation
----@param reputation number Current reputation
----@return table|nil Mission data or nil if no mission available
-function Amazoid.Utils.generateMission(reputation)
-    -- TODO: Implement mission generation
-    return nil
+--- Calculate actual delivery time (adds variance to the estimate)
+--- Actual delivery can be 10% early to 20% late
+---@param estimatedTime number The estimated delivery time
+---@return number Actual delivery time in game hours
+function Amazoid.Utils.calculateActualDeliveryTime(estimatedTime)
+    -- Variance: -10% to +20% of estimated time
+    local variance = ZombRand(-10, 21) / 100 -- -0.10 to +0.20
+    local actualTime = estimatedTime * (1 + variance)
+    return math.max(math.floor(actualTime), 1)
 end
 
 --- Clamp reputation to valid range
@@ -122,6 +107,39 @@ end
 ---@return number Clamped reputation
 function Amazoid.Utils.clampReputation(reputation)
     return math.max(Amazoid.Reputation.MIN, math.min(Amazoid.Reputation.MAX, reputation))
+end
+
+--- Check if any player has read a specific item (split-screen support)
+--- Uses modData.AmazoidRead flag which is set when ANY player closes the letter
+---@param item InventoryItem The item to check
+---@return boolean True if any player has read this item
+function Amazoid.Utils.hasAnyPlayerRead(item)
+    if not item then return false end
+
+    -- First check our custom flag (set when any player closes the letter)
+    local modData = item:getModData()
+    if modData and modData.AmazoidRead then
+        return true
+    end
+
+    -- Fallback: check PZ's literature tracking for all players
+    if modData and modData.literatureTitle then
+        local literatureTitle = modData.literatureTitle
+        local players = IsoPlayer.getPlayers()
+        if players then
+            for i = 0, players:size() - 1 do
+                local p = players:get(i)
+                if p and p:getAlreadyReadPages() then
+                    local readPages = p:getAlreadyReadPages()
+                    if readPages:contains(literatureTitle) then
+                        return true
+                    end
+                end
+            end
+        end
+    end
+
+    return false
 end
 
 print("[Amazoid] Utils module loaded")

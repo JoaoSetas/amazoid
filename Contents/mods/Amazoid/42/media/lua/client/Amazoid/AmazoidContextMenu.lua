@@ -1,13 +1,15 @@
 --[[
     Amazoid - Mysterious Mailbox Merchant
     Context Menu Integration
-    
+
     This file adds Amazoid options to mailbox context menus.
 ]]
 
 require "Amazoid/AmazoidData"
 require "Amazoid/AmazoidMailbox"
 require "Amazoid/AmazoidLetters"
+require "Amazoid/AmazoidCatalogs"
+require "Amazoid/AmazoidMissions"
 require "Amazoid/UI/AmazoidLetterPanel"
 require "Amazoid/UI/AmazoidCatalogPanel"
 require "Amazoid/UI/AmazoidMissionsPanel"
@@ -21,10 +23,10 @@ Amazoid.ContextMenu = Amazoid.ContextMenu or {}
 ---@param test boolean Test mode
 local function onFillWorldObjectContextMenu(player, context, worldObjects, test)
     if test then return end
-    
+
     local playerObj = getSpecificPlayer(player)
     if not playerObj then return end
-    
+
     -- Find mailbox in clicked objects
     local mailbox = nil
     for _, obj in ipairs(worldObjects) do
@@ -33,31 +35,30 @@ local function onFillWorldObjectContextMenu(player, context, worldObjects, test)
             break
         end
     end
-    
+
     if not mailbox then return end
-    
+
     -- Check distance
     local distance = playerObj:DistToSquared(mailbox:getX(), mailbox:getY())
     if distance > 4 then return end -- Must be close enough
-    
+
     -- Create Amazoid submenu
     local amazoidOption = context:addOption("Amazoid Services", worldObjects, nil)
     local subMenu = ISContextMenu:getNew(context)
     context:addSubMenu(amazoidOption, subMenu)
-    
+
     -- Check if mailbox has discovery letter
     if Amazoid.Mailbox.hasDiscoveryLetter(mailbox) then
         subMenu:addOption("Read Discovery Letter", mailbox, Amazoid.ContextMenu.onReadDiscoveryLetter, playerObj)
     end
-    
+
     -- Check if mailbox has active contract
     if Amazoid.Mailbox.hasContract(mailbox) then
         -- Full service menu
         subMenu:addOption("View Catalog", mailbox, Amazoid.ContextMenu.onViewCatalog, playerObj)
         subMenu:addOption("View Missions", mailbox, Amazoid.ContextMenu.onViewMissions, playerObj)
         subMenu:addOption("Check Order Status", mailbox, Amazoid.ContextMenu.onCheckOrderStatus, playerObj)
-        subMenu:addOption("Check for Mail", mailbox, Amazoid.ContextMenu.onCheckMail, playerObj)
-        
+
         -- Show reputation
         local reputation = 0
         if Amazoid.Client then
@@ -78,11 +79,11 @@ end
 ---@param player IsoPlayer The player
 function Amazoid.ContextMenu.onReadDiscoveryLetter(mailbox, player)
     local letterData = Amazoid.Letters.getDiscoveryLetter()
-    
+
     -- Check if player has the letter item in inventory or mailbox
     local container = mailbox:getContainer()
     local letterItem = nil
-    
+
     if container then
         local items = container:getItems()
         for i = 0, items:size() - 1 do
@@ -93,15 +94,37 @@ function Amazoid.ContextMenu.onReadDiscoveryLetter(mailbox, player)
             end
         end
     end
-    
+
     AmazoidLetterPanel.showLetter(player, letterData, true, mailbox, letterItem)
 end
 
---- View catalog action
+--- View catalog action (from mailbox menu)
+--- Tries to find a catalog in the mailbox or player's inventory
 ---@param mailbox IsoObject The mailbox
 ---@param player IsoPlayer The player
 function Amazoid.ContextMenu.onViewCatalog(mailbox, player)
-    AmazoidCatalogPanel.showCatalog(player, mailbox)
+    -- Look for a catalog in the player's inventory first
+    local inventory = player:getInventory()
+
+    local catalog = inventory:getFirstTypeRecurse("Amazoid.Catalog")
+    if catalog then
+        local edition = catalog:getModData().AmazoidEdition or "basic_vol1"
+        AmazoidCatalogPanel.showCatalog(player, catalog, edition)
+        return
+    end
+
+    -- Check the mailbox for catalogs
+    local container = mailbox:getContainer()
+    if container then
+        catalog = container:getFirstTypeRecurse("Amazoid.Catalog")
+        if catalog then
+            local edition = catalog:getModData().AmazoidEdition or "basic_vol1"
+            AmazoidCatalogPanel.showCatalog(player, catalog, edition)
+            return
+        end
+    end
+
+    player:Say("I need a catalog to browse items.")
 end
 
 --- View missions action
@@ -116,42 +139,23 @@ end
 ---@param player IsoPlayer The player
 function Amazoid.ContextMenu.onCheckOrderStatus(mailbox, player)
     local orders = Amazoid.Mailbox.getPendingOrders(mailbox)
-    
+
     if #orders == 0 then
         player:Say("No pending orders.")
         return
     end
-    
-    local currentTime = getGameTime():getWorldAgeHours()
-    
-    for _, order in ipairs(orders) do
-        local timeRemaining = order.deliveryTime - (currentTime - order.orderTime)
-        if timeRemaining > 0 then
-            player:Say("Order #" .. order.id .. ": " .. math.ceil(timeRemaining) .. " hours remaining")
-        else
-            player:Say("Order #" .. order.id .. ": Ready for pickup!")
-        end
-    end
-end
 
---- Check for mail action
----@param mailbox IsoObject The mailbox
----@param player IsoPlayer The player
-function Amazoid.ContextMenu.onCheckMail(mailbox, player)
-    -- Process any pending orders that should be delivered
-    Amazoid.Mailbox.processOrders(mailbox)
-    
-    local container = mailbox:getContainer()
-    if not container then
-        player:Say("Mailbox is empty.")
-        return
-    end
-    
-    local itemCount = container:getItems():size()
-    if itemCount > 0 then
-        player:Say("Found " .. itemCount .. " item(s) in the mailbox.")
-    else
-        player:Say("Mailbox is empty.")
+    local currentTime = getGameTime():getWorldAgeHours()
+
+    for _, order in ipairs(orders) do
+        -- Use estimated time for display, actual delivery may vary
+        local estimatedTime = order.estimatedTime or order.deliveryTime
+        local timeRemaining = estimatedTime - (currentTime - order.orderTime)
+        if timeRemaining > 0 then
+            player:Say("Order #" .. order.id .. ": ~" .. math.ceil(timeRemaining) .. " hours remaining")
+        else
+            player:Say("Order #" .. order.id .. ": Should arrive soon...")
+        end
     end
 end
 
@@ -165,43 +169,55 @@ Events.OnFillWorldObjectContextMenu.Add(onFillWorldObjectContextMenu)
 local function onFillInventoryObjectContextMenu(player, context, items)
     local playerObj = getSpecificPlayer(player)
     if not playerObj then return end
-    
+
     -- Find Amazoid letter items
+    -- Note: PZ automatically shows checkmark icon for items with literatureTitle when read
     for _, itemStack in ipairs(items) do
         local item = itemStack
         if type(itemStack) == "table" then
             item = itemStack.items[1]
         end
-        
+
         if item and item:getFullType() then
             local itemType = item:getFullType()
-            
+            local option = nil
+            local iconTexture = item:getTex()
+
             -- Letters
             if itemType == "Amazoid.DiscoveryLetter" then
-                context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj, "discovery")
+                option = context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj,
+                    "discovery")
             elseif itemType == "Amazoid.SignedContract" then
-                context:addOption("Read Contract", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj, "contract")
+                option = context:addOption("Read Contract", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj,
+                    "contract")
             elseif itemType == "Amazoid.MissionLetter" then
-                context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj, "mission")
+                option = context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj,
+                    "mission")
             elseif itemType == "Amazoid.LoreLetter" then
-                context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj, "lore")
+                option = context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj,
+                    "lore")
             elseif itemType == "Amazoid.DeliveryNoteLetter" then
-                context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj, "delivery")
+                option = context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj,
+                    "delivery")
             elseif itemType == "Amazoid.GiftLetter" then
-                context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj, "gift")
-            -- Catalogs
-            elseif itemType == "Amazoid.BasicCatalog" then
-                context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj, "basic")
-            elseif itemType == "Amazoid.ToolsCatalog" then
-                context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj, "tools")
-            elseif itemType == "Amazoid.WeaponsCatalog" then
-                context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj, "weapons")
-            elseif itemType == "Amazoid.MedicalCatalog" then
-                context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj, "medical")
-            elseif itemType == "Amazoid.SeasonalCatalog" then
-                context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj, "seasonal")
-            elseif itemType == "Amazoid.BlackMarketCatalog" then
-                context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj, "blackmarket")
+                option = context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj,
+                    "gift")
+            elseif itemType == "Amazoid.MerchantLetter" then
+                option = context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj,
+                    "merchant")
+            elseif itemType == "Amazoid.OrderReceipt" then
+                option = context:addOption("Read Receipt", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj,
+                    "receipt")
+                -- Unified Catalog (edition stored in modData)
+            elseif itemType == "Amazoid.Catalog" then
+                local edition = item:getModData().AmazoidEdition or "basic_vol1"
+                option = context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj,
+                    edition)
+            end
+
+            -- Add icon to the option
+            if option and iconTexture then
+                option.iconTexture = iconTexture
             end
         end
     end
@@ -214,14 +230,40 @@ end
 function Amazoid.ContextMenu.onReadInventoryLetter(item, player, letterType)
     local letterData = nil
     local isDiscovery = false
-    
+
     if letterType == "discovery" then
         letterData = Amazoid.Letters.getDiscoveryLetter()
         isDiscovery = true
     elseif letterType == "contract" then
+        -- Build dynamic contract stats
+        local data = player:getModData().Amazoid or {}
+        local reputation = data.reputation or 0
+        local discount = 0
+        if Amazoid and Amazoid.Utils and Amazoid.Utils.calculateDiscount then
+            discount = Amazoid.Utils.calculateDiscount(reputation)
+        end
+        local discountPct = math.floor(discount * 100)
+        local totalOrders = data.totalOrders or 0
+        local totalSpent = data.totalSpent or 0
+        local missionsCompleted = data.missionsCompleted or 0
+
+        local content = "This contract binds you to the Amazoid service.\n\n"
+        content = content ..
+            "You have agreed to the Terms of Service and may now access all merchant services through designated mailboxes.\n\n"
+        content = content .. "━━━━━━━━━━━━━━━━━━━━\n"
+        content = content .. "YOUR ACCOUNT STATUS:\n"
+        content = content .. "━━━━━━━━━━━━━━━━━━━━\n\n"
+        content = content .. "Reputation: " .. reputation .. "/100\n"
+        content = content .. "Current Discount: " .. discountPct .. "%\n"
+        content = content .. "Orders Placed: " .. totalOrders .. "\n"
+        content = content .. "Total Spent: $" .. totalSpent .. "\n"
+        content = content .. "Missions Completed: " .. missionsCompleted .. "\n\n"
+        content = content .. "━━━━━━━━━━━━━━━━━━━━\n\n"
+        content = content .. "Remember: We always deliver.\n\n- The Merchants"
+
         letterData = {
             title = "Signed Contract",
-            content = "This contract binds you to the Amazoid service.\n\nYou have agreed to the Terms of Service and may now access all merchant services through designated mailboxes.\n\nYour reputation will determine your discount rates and access to premium catalogs.\n\nRemember: We always deliver.\n\n- The Merchants"
+            content = content
         }
     elseif letterType == "delivery" then
         letterData = {
@@ -235,6 +277,40 @@ function Amazoid.ContextMenu.onReadInventoryLetter(item, player, letterType)
         local modData = item:getModData()
         if modData.AmazoidLetterData then
             letterData = modData.AmazoidLetterData
+        elseif modData.AmazoidMission then
+            -- Mission letter - deserialize mission data from flattened modData
+            local mission = Amazoid.Missions.deserializeFromModData(modData.AmazoidMission)
+            local letterType = modData.AmazoidLetterType or "mission"
+
+            if letterType == "mission_complete" then
+                -- Mission completion letter
+                letterData = {
+                    title = "Mission Complete!",
+                    content = Amazoid.Missions.createCompletionLetterContent(mission)
+                }
+            else
+                -- Mission request letter
+                letterData = {
+                    title = mission.title or "New Mission",
+                    content = Amazoid.Missions.createMissionLetterContent(mission),
+                    mission = mission,
+                }
+
+                -- Auto-accept mission when reading the letter (if not already active)
+                if Amazoid.Client and Amazoid.Client.playerData then
+                    local isAlreadyActive = false
+                    for _, m in ipairs(Amazoid.Client.playerData.activeMissions or {}) do
+                        if m.id == mission.id then
+                            isAlreadyActive = true
+                            break
+                        end
+                    end
+
+                    if not isAlreadyActive then
+                        Amazoid.Client.acceptMission(mission)
+                    end
+                end
+            end
         else
             letterData = {
                 title = "Letter",
@@ -242,14 +318,14 @@ function Amazoid.ContextMenu.onReadInventoryLetter(item, player, letterType)
             }
         end
     end
-    
+
     if letterData then
         -- For discovery letter, need to find nearby mailbox
         local mailbox = nil
         if isDiscovery then
             mailbox = Amazoid.Mailbox.findNearestMailbox(player, 5)
         end
-        
+
         AmazoidLetterPanel.showLetter(player, letterData, isDiscovery, mailbox, item)
     end
 end
@@ -259,11 +335,27 @@ end
 ---@param player IsoPlayer The player
 ---@param catalogType string Type of catalog
 function Amazoid.ContextMenu.onBrowseCatalog(item, player, catalogType)
-    -- For now, just show a message - full catalog UI coming later
-    player:Say("Browsing " .. catalogType .. " catalog...")
-    
-    -- TODO: Open full catalog UI with the appropriate category
-    -- AmazoidCatalogPanel.showCatalog(player, nil, catalogType)
+    -- Check if catalog has a stored edition ID
+    local modData = item:getModData()
+    local editionId = modData.AmazoidEdition
+
+    if not editionId then
+        -- Legacy catalog or no edition set - determine from catalog type
+        if Amazoid.Catalogs and Amazoid.Catalogs.getEditionFromType then
+            editionId = Amazoid.Catalogs.getEditionFromType(catalogType)
+        else
+            editionId = "basic_vol1" -- Fallback
+        end
+        -- Store it for next time
+        modData.AmazoidEdition = editionId
+    end
+
+    -- Open the catalog UI with the edition
+    if AmazoidCatalogPanel and AmazoidCatalogPanel.showCatalog then
+        AmazoidCatalogPanel.showCatalog(player, item, editionId)
+    else
+        print("[Amazoid] ERROR: CatalogPanel not loaded")
+    end
 end
 
 -- Register inventory context menu event

@@ -2,18 +2,9 @@ Sandbox_EN = {
     -- Page name
     Sandbox_Amazoid = "Amazoid",
     
-    -- Letter Spawning
-    Sandbox_Amazoid_LetterSpawnChance = "Letter Spawn Chance",
-    Sandbox_Amazoid_LetterSpawnChance_tooltip = "Chance (0-1) for a discovery letter to spawn in each mailbox. Default: 0.1 (10%)",
-    
-    Sandbox_Amazoid_SpawnInStartingHouse = "Spawn in Starting House",
-    Sandbox_Amazoid_SpawnInStartingHouse_tooltip = "Always spawn a discovery letter in the nearest mailbox to the player's starting location.",
-    
-    Sandbox_Amazoid_SpawnInAllMailboxes = "Spawn in All Mailboxes",
-    Sandbox_Amazoid_SpawnInAllMailboxes_tooltip = "Spawn discovery letters in all mailboxes. Overrides spawn chance.",
-    
-    Sandbox_Amazoid_MaxLettersPerCell = "Max Letters Per Cell",
-    Sandbox_Amazoid_MaxLettersPerCell_tooltip = "Maximum number of discovery letters that can spawn per map cell.",
+    -- First Contact
+    Sandbox_Amazoid_FirstContactDays = "First Contact Window (Days)",
+    Sandbox_Amazoid_FirstContactDays_tooltip = "The mysterious merchant will make first contact within this many days. If the mod is installed mid-game, contact will happen on the next opportunity.",
     
     -- Economy
     Sandbox_Amazoid_PriceMultiplier = "Price Multiplier",
@@ -22,83 +13,12 @@ Sandbox_EN = {
     Sandbox_Amazoid_DeliveryTimeMultiplier = "Delivery Time Multiplier",
     Sandbox_Amazoid_DeliveryTimeMultiplier_tooltip = "Multiplier for delivery times. Higher = longer wait times.",
     
+    Sandbox_Amazoid_MerchantVisitInterval = "Merchant Visit Interval",
+    Sandbox_Amazoid_MerchantVisitInterval_tooltip = "How often (in game hours) the merchant checks your mailbox for orders. Default: 1 hour.",
+    
     Sandbox_Amazoid_ReputationGainMultiplier = "Reputation Gain Multiplier",
     Sandbox_Amazoid_ReputationGainMultiplier_tooltip = "Multiplier for reputation gains. Higher = faster reputation building.",
     
     Sandbox_Amazoid_ReputationLossMultiplier = "Reputation Loss Multiplier",
     Sandbox_Amazoid_ReputationLossMultiplier_tooltip = "Multiplier for reputation losses. Higher = harsher penalties.",
-    
-    Sandbox_Amazoid_StartingReputation = "Starting Reputation",
-    Sandbox_Amazoid_StartingReputation_tooltip = "Initial reputation when signing the contract.",
-    
-    -- Missions
-    Sandbox_Amazoid_MissionsEnabled = "Missions Enabled",
-    Sandbox_Amazoid_MissionsEnabled_tooltip = "Enable the mission system.",
-    
-    Sandbox_Amazoid_CollectionMissionsEnabled = "Collection Missions",
-    Sandbox_Amazoid_CollectionMissionsEnabled_tooltip = "Enable collection-type missions.",
-    
-    Sandbox_Amazoid_EliminationMissionsEnabled = "Elimination Missions",
-    Sandbox_Amazoid_EliminationMissionsEnabled_tooltip = "Enable elimination-type missions.",
-    
-    Sandbox_Amazoid_ScavengerMissionsEnabled = "Scavenger Missions",
-    Sandbox_Amazoid_ScavengerMissionsEnabled_tooltip = "Enable scavenger hunt missions.",
-    
-    Sandbox_Amazoid_TimedDeliveryMissionsEnabled = "Timed Delivery Missions",
-    Sandbox_Amazoid_TimedDeliveryMissionsEnabled_tooltip = "Enable timed delivery missions.",
-    
-    Sandbox_Amazoid_ProtectionMissionsEnabled = "Protection Missions",
-    Sandbox_Amazoid_ProtectionMissionsEnabled_tooltip = "Enable protection device missions.",
-    
-    Sandbox_Amazoid_MissionRewardMultiplier = "Mission Reward Multiplier",
-    Sandbox_Amazoid_MissionRewardMultiplier_tooltip = "Multiplier for mission rewards.",
-    
-    -- Gifts
-    Sandbox_Amazoid_GiftsEnabled = "Gifts Enabled",
-    Sandbox_Amazoid_GiftsEnabled_tooltip = "Enable the merchant gift system.",
-    
-    Sandbox_Amazoid_GiftCooldownHours = "Gift Cooldown (Hours)",
-    Sandbox_Amazoid_GiftCooldownHours_tooltip = "Minimum hours between receiving gifts.",
-    
-    -- Protection
-    Sandbox_Amazoid_ProtectionDurationMinutes = "Protection Duration (Minutes)",
-    Sandbox_Amazoid_ProtectionDurationMinutes_tooltip = "Duration of protection missions in real-time minutes.",
-    
-    Sandbox_Amazoid_ProtectionDeviceHealth = "Protection Device Health",
-    Sandbox_Amazoid_ProtectionDeviceHealth_tooltip = "Starting health of protection devices.",
-    
-    -- Catalogs
-    Sandbox_Amazoid_BasicCatalogEnabled = "Basic Catalog",
-    Sandbox_Amazoid_BasicCatalogEnabled_tooltip = "Enable the basic supplies catalog.",
-    
-    Sandbox_Amazoid_ToolsCatalogEnabled = "Tools Catalog",
-    Sandbox_Amazoid_ToolsCatalogEnabled_tooltip = "Enable the tools catalog.",
-    
-    Sandbox_Amazoid_WeaponsCatalogEnabled = "Weapons Catalog",
-    Sandbox_Amazoid_WeaponsCatalogEnabled_tooltip = "Enable the weapons catalog.",
-    
-    Sandbox_Amazoid_MedicalCatalogEnabled = "Medical Catalog",
-    Sandbox_Amazoid_MedicalCatalogEnabled_tooltip = "Enable the medical supplies catalog.",
-    
-    Sandbox_Amazoid_SeasonalCatalogEnabled = "Seasonal Catalog",
-    Sandbox_Amazoid_SeasonalCatalogEnabled_tooltip = "Enable the seasonal items catalog.",
-    
-    Sandbox_Amazoid_BlackMarketCatalogEnabled = "Black Market Catalog",
-    Sandbox_Amazoid_BlackMarketCatalogEnabled_tooltip = "Enable the black market catalog.",
-    
-    -- Catalog Reputation Thresholds
-    Sandbox_Amazoid_ToolsCatalogReputation = "Tools Catalog Reputation",
-    Sandbox_Amazoid_ToolsCatalogReputation_tooltip = "Reputation required to unlock the tools catalog.",
-    
-    Sandbox_Amazoid_WeaponsCatalogReputation = "Weapons Catalog Reputation",
-    Sandbox_Amazoid_WeaponsCatalogReputation_tooltip = "Reputation required to unlock the weapons catalog.",
-    
-    Sandbox_Amazoid_MedicalCatalogReputation = "Medical Catalog Reputation",
-    Sandbox_Amazoid_MedicalCatalogReputation_tooltip = "Reputation required to unlock the medical catalog.",
-    
-    Sandbox_Amazoid_SeasonalCatalogReputation = "Seasonal Catalog Reputation",
-    Sandbox_Amazoid_SeasonalCatalogReputation_tooltip = "Reputation required to unlock the seasonal catalog.",
-    
-    Sandbox_Amazoid_BlackMarketCatalogReputation = "Black Market Catalog Reputation",
-    Sandbox_Amazoid_BlackMarketCatalogReputation_tooltip = "Reputation required to unlock the black market catalog.",
 }

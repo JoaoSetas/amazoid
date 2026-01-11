@@ -1,7 +1,7 @@
 --[[
     Amazoid - Mysterious Mailbox Merchant
     Items Database
-    
+
     This file contains the catalog items and their properties.
 ]]
 
@@ -118,46 +118,47 @@ Amazoid.Items.ToolsCatalog = {
 }
 
 -- Weapons catalog (reputation >= 25)
+-- Prices based on in-game rarity
 Amazoid.Items.WeaponsCatalog = {
     {
         itemType = "Base.BaseballBat",
         name = "Baseball Bat",
-        basePrice = 65,
+        basePrice = 150,
         category = "melee",
         size = 2,
     },
     {
         itemType = "Base.Crowbar",
         name = "Crowbar",
-        basePrice = 75,
+        basePrice = 300,
         category = "melee",
         size = 2,
     },
     {
         itemType = "Base.Axe",
         name = "Axe",
-        basePrice = 120,
+        basePrice = 400,
         category = "melee",
         size = 2,
     },
     {
         itemType = "Base.HuntingKnife",
         name = "Hunting Knife",
-        basePrice = 85,
+        basePrice = 350,
         category = "melee",
         size = 1,
     },
     {
         itemType = "Base.Bullets9mm",
         name = "9mm Ammo (Box)",
-        basePrice = 100,
+        basePrice = 200,
         category = "ammo",
         size = 1,
     },
     {
         itemType = "Base.ShotgunShells",
         name = "Shotgun Shells (Box)",
-        basePrice = 120,
+        basePrice = 250,
         category = "ammo",
         size = 1,
     },
@@ -279,46 +280,54 @@ Amazoid.Items.SeasonalCatalogs = {
 }
 
 -- Black Market catalog (reputation >= 50)
+-- Prices based on extreme rarity of these items in-game
 Amazoid.Items.BlackMarketCatalog = {
     {
         itemType = "Base.Pistol",
         name = "Pistol",
-        basePrice = 350,
+        basePrice = 800,
         category = "firearm",
         size = 1,
     },
     {
         itemType = "Base.Shotgun",
         name = "Shotgun",
-        basePrice = 500,
+        basePrice = 1200,
         category = "firearm",
         size = 2, -- Needs large mailbox
     },
     {
         itemType = "Base.AssaultRifle",
         name = "Assault Rifle",
-        basePrice = 750,
+        basePrice = 3000,
         category = "firearm",
         size = 2,
     },
     {
         itemType = "Base.Katana",
         name = "Katana",
-        basePrice = 400,
+        basePrice = 2500,
+        category = "melee",
+        size = 2,
+    },
+    {
+        itemType = "Base.Sledgehammer",
+        name = "Sledgehammer",
+        basePrice = 2000,
         category = "melee",
         size = 2,
     },
     {
         itemType = "Base.NightVisionGoggles",
         name = "Night Vision Goggles",
-        basePrice = 600,
+        basePrice = 3500,
         category = "equipment",
         size = 1,
     },
     {
         itemType = "Base.Generator",
         name = "Portable Generator",
-        basePrice = 1000,
+        basePrice = 2500,
         category = "equipment",
         size = 3, -- Needs delivery crate
     },
@@ -329,33 +338,33 @@ Amazoid.Items.BlackMarketCatalog = {
 ---@return table Available items
 function Amazoid.Items.getAvailableItems(reputation)
     local items = {}
-    
+
     -- Always available after contract
     for _, item in ipairs(Amazoid.Items.BasicCatalog) do
         table.insert(items, item)
     end
-    
+
     -- Tools
     if Amazoid.Utils.canAccessCatalog(reputation, Amazoid.CatalogCategories.TOOLS) then
         for _, item in ipairs(Amazoid.Items.ToolsCatalog) do
             table.insert(items, item)
         end
     end
-    
+
     -- Weapons
     if Amazoid.Utils.canAccessCatalog(reputation, Amazoid.CatalogCategories.WEAPONS) then
         for _, item in ipairs(Amazoid.Items.WeaponsCatalog) do
             table.insert(items, item)
         end
     end
-    
+
     -- Medical
     if Amazoid.Utils.canAccessCatalog(reputation, Amazoid.CatalogCategories.MEDICAL) then
         for _, item in ipairs(Amazoid.Items.MedicalCatalog) do
             table.insert(items, item)
         end
     end
-    
+
     -- Seasonal
     if Amazoid.Utils.canAccessCatalog(reputation, Amazoid.CatalogCategories.SEASONAL) then
         local season = Amazoid.Utils.getCurrentSeason()
@@ -366,14 +375,14 @@ function Amazoid.Items.getAvailableItems(reputation)
             end
         end
     end
-    
+
     -- Black Market
     if Amazoid.Utils.canAccessCatalog(reputation, Amazoid.CatalogCategories.BLACKMARKET) then
         for _, item in ipairs(Amazoid.Items.BlackMarketCatalog) do
             table.insert(items, item)
         end
     end
-    
+
     return items
 end
 
