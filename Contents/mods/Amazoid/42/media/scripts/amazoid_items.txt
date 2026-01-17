@@ -8,12 +8,13 @@ module Amazoid
     /**
      * Discovery Letter - Found in mailboxes, starts the Amazoid service
      * Icon: Same as Base.GenericMail (Paperwork5)
+     * Uses base:literature for read checkmark tracking
      */
     item DiscoveryLetter
     {
         DisplayCategory = Literature,
         DisplayName = Amazoid Discovery Letter,
-        ItemType = base:normal,
+        ItemType = base:literature,
         Weight = 0.01,
         Icon = Paperwork5,
         WorldStaticModel = Paperwork5,
@@ -22,6 +23,7 @@ module Amazoid
     /**
      * Signed Contract - Proof of service agreement
      * Icon: Same as Base.OfficialDocument (LiquorLicense)
+     * NOTE: Uses base:normal - NO read tracking per design
      */
     item SignedContract
     {
@@ -37,6 +39,7 @@ module Amazoid
      * Catalog - Magazine-style ordering catalog with volumes
      * There is only one catalog item type, editions are stored in modData
      * Icon: Same as Base.Catalog (Catalogue)
+     * NOTE: Uses base:normal - NO read tracking per design
      */
     item Catalog
     {
@@ -51,12 +54,13 @@ module Amazoid
     /**
      * Mission Letter - Contains mission details
      * Icon: Same as Base.GenericMail (Paperwork5)
+     * Uses base:literature for read checkmark tracking
      */
     item MissionLetter
     {
         DisplayCategory = Literature,
         DisplayName = Amazoid Mission Letter,
-        ItemType = base:normal,
+        ItemType = base:literature,
         Weight = 0.01,
         Icon = Paperwork5,
         WorldStaticModel = Paperwork5,
@@ -65,12 +69,13 @@ module Amazoid
     /**
      * Lore Letter - Contains backstory and hints
      * Icon: Same as Base.GenericMail (Paperwork5)
+     * Uses base:literature for read checkmark tracking
      */
     item LoreLetter
     {
         DisplayCategory = Literature,
         DisplayName = Amazoid Lore Letter,
-        ItemType = base:normal,
+        ItemType = base:literature,
         Weight = 0.01,
         Icon = Paperwork5,
         WorldStaticModel = Paperwork5,
@@ -79,12 +84,13 @@ module Amazoid
     /**
      * Delivery Note Letter - Confirms order delivery
      * Icon: Same as Base.GenericMail (Paperwork5)
+     * Uses base:literature for read checkmark tracking
      */
     item DeliveryNoteLetter
     {
         DisplayCategory = Literature,
         DisplayName = Amazoid Delivery Note,
-        ItemType = base:normal,
+        ItemType = base:literature,
         Weight = 0.01,
         Icon = Paperwork5,
         WorldStaticModel = Paperwork5,
@@ -93,12 +99,13 @@ module Amazoid
     /**
      * Gift Letter - Accompanies merchant gifts
      * Icon: Same as Base.GenericMail (Paperwork5)
+     * Uses base:literature for read checkmark tracking
      */
     item GiftLetter
     {
         DisplayCategory = Literature,
         DisplayName = Amazoid Gift Letter,
-        ItemType = base:normal,
+        ItemType = base:literature,
         Weight = 0.01,
         Icon = Paperwork5,
         WorldStaticModel = Paperwork5,
@@ -107,12 +114,13 @@ module Amazoid
     /**
      * Merchant Letter - General letters from the merchant
      * Icon: Same as Base.GenericMail (Paperwork5)
+     * Uses base:literature for read checkmark tracking
      */
     item MerchantLetter
     {
         DisplayCategory = Literature,
         DisplayName = Amazoid Merchant Letter,
-        ItemType = base:normal,
+        ItemType = base:literature,
         Weight = 0.01,
         Icon = Paperwork5,
         WorldStaticModel = Paperwork5,
@@ -121,12 +129,13 @@ module Amazoid
     /**
      * Order Receipt - Confirms order has been placed
      * Icon: Same as Base.Receipt
+     * Uses base:literature for read checkmark tracking
      */
     item OrderReceipt
     {
         DisplayCategory = Literature,
         DisplayName = Amazoid Order Receipt,
-        ItemType = base:normal,
+        ItemType = base:literature,
         Weight = 0.01,
         Icon = Receipt,
         WorldStaticModel = Receipt,

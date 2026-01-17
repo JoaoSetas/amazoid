@@ -109,37 +109,4 @@ function Amazoid.Utils.clampReputation(reputation)
     return math.max(Amazoid.Reputation.MIN, math.min(Amazoid.Reputation.MAX, reputation))
 end
 
---- Check if any player has read a specific item (split-screen support)
---- Uses modData.AmazoidRead flag which is set when ANY player closes the letter
----@param item InventoryItem The item to check
----@return boolean True if any player has read this item
-function Amazoid.Utils.hasAnyPlayerRead(item)
-    if not item then return false end
-
-    -- First check our custom flag (set when any player closes the letter)
-    local modData = item:getModData()
-    if modData and modData.AmazoidRead then
-        return true
-    end
-
-    -- Fallback: check PZ's literature tracking for all players
-    if modData and modData.literatureTitle then
-        local literatureTitle = modData.literatureTitle
-        local players = IsoPlayer.getPlayers()
-        if players then
-            for i = 0, players:size() - 1 do
-                local p = players:get(i)
-                if p and p:getAlreadyReadPages() then
-                    local readPages = p:getAlreadyReadPages()
-                    if readPages:contains(literatureTitle) then
-                        return true
-                    end
-                end
-            end
-        end
-    end
-
-    return false
-end
-
 print("[Amazoid] Utils module loaded")

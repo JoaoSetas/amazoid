@@ -105,7 +105,7 @@ Amazoid.Events.fire("ReputationChanged", {oldRep=10, newRep=15, reason="mission"
 ### Merchant Visit Logic
 The merchant visits the player's contract mailbox periodically:
 - **Hourly Check**: Attempts visit every hour via `Events.EveryHours`
-- **Distance Check**: Merchant won't visit if any player is within 20 tiles of mailbox
+- **Distance Check**: Merchant won't visit if any player is within 15 tiles of mailbox
 - **Retry System**: If blocked by proximity, retries every 10 minutes via `Events.EveryTenMinutes`
 - **Pending Flag**: `playerData.pendingMerchantVisit` tracks if retry is needed
 
@@ -118,18 +118,18 @@ For split-screen co-op, letter read status uses dual tracking:
 ### Reputation Thresholds (Catalog Unlocks)
 Catalog editions unlock at specific reputation levels (from AmazoidData.lua):
 
-| Rep | Catalog Edition   |
-| --- | ----------------- |
-| 0   | Basic             |
-| 5   | Seasonal          |
-| 10  | Outdoor           |
-| 15  | Clothing          |
-| 20  | Tools             |
-| 25  | Literature        |
-| 30  | Medical           |
-| 35  | Electronics       |
-| 40  | Weapons           |
-| 60  | Black Market      |
+| Rep | Catalog Edition |
+| --- | --------------- |
+| 0   | Basic           |
+| 5   | Seasonal        |
+| 10  | Outdoor         |
+| 15  | Clothing        |
+| 20  | Tools           |
+| 25  | Literature      |
+| 30  | Medical         |
+| 35  | Electronics     |
+| 40  | Weapons         |
+| 60  | Black Market    |
 
 ### Milestone Letter Thresholds
 Milestone letters are sent at these reputation values:

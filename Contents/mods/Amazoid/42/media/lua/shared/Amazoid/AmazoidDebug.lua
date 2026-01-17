@@ -884,8 +884,12 @@ function AmazoidDebug.merchantVisit()
 end
 
 -- Force first contact (merchant visits with discovery letter)
+-- Uses the same logic as normal first contact:
+-- - Finds the closest mailbox
+-- - Player must be 15-100 tiles away from the mailbox
+-- - If player is too close (<15 tiles), sets up retry every 10 minutes
 function AmazoidDebug.firstContact()
-    -- Get all local players for split-screen support (for logging)
+    -- Get all local players for split-screen support
     local allPlayers = IsoPlayer.getPlayers()
     if not allPlayers or allPlayers:size() == 0 then
         AmazoidDebug.log("No players found")
@@ -901,17 +905,31 @@ function AmazoidDebug.firstContact()
         end
     end
 
-    -- Use core function to force first contact (with reset)
-    if Amazoid.Mailbox and Amazoid.Mailbox.forceFirstContact then
+    -- Reset first contact state so it can be triggered again
+    if Amazoid.Client and Amazoid.Client.playerData then
+        Amazoid.Client.playerData.firstContactMade = false
+        Amazoid.Client.playerData.firstContactDay = nil
         AmazoidDebug.log("First contact state reset")
-        local success = Amazoid.Mailbox.forceFirstContact(nil, true)
+    end
+
+    -- Use the client's tryFirstContact which has proper distance checking (15-100 tiles)
+    if Amazoid.Client and Amazoid.Client.tryFirstContact then
+        local success, tooClose = Amazoid.Client.tryFirstContact()
         if success then
             AmazoidDebug.log("First contact triggered successfully")
+        elseif tooClose then
+            -- Player was too close, set pending flag to retry every 10 minutes
+            if Amazoid.Client.playerData then
+                Amazoid.Client.playerData.pendingMerchantVisit = true
+            end
+            AmazoidDebug.log(
+                "Player is too close to mailbox (< 15 tiles). Will retry every 10 minutes when player moves away.")
+            AmazoidDebug.log("Move at least 15 tiles away from the nearest mailbox and wait, or run this command again.")
         else
-            AmazoidDebug.log("First contact failed - no mailbox found within 100 tiles")
+            AmazoidDebug.log("First contact failed - no mailbox found within 15-100 tiles of player")
         end
     else
-        AmazoidDebug.log("Amazoid.Mailbox.forceFirstContact not available")
+        AmazoidDebug.log("Amazoid.Client.tryFirstContact not available")
     end
 end
 

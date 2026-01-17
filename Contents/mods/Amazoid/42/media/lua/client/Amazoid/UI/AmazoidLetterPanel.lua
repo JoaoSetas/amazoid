@@ -346,11 +346,12 @@ function AmazoidLetterPanel:close()
     end
 
     -- Mark letter as read using PZ's built-in literature tracking
-    -- Mark for ALL local players (split-screen support)
+    -- Mark for ALL local players (split-screen support) so checkmark shows for everyone
     if self.letterItem then
         local modData = self.letterItem:getModData()
         if modData and modData.literatureTitle then
             -- Mark as read for ALL local players (split-screen support)
+            -- PZ's ISInventoryPane checks player:isLiteratureRead() for the checkmark
             local players = IsoPlayer.getPlayers()
             for i = 0, players:size() - 1 do
                 local p = players:get(i)
@@ -360,11 +361,6 @@ function AmazoidLetterPanel:close()
             end
             print("[Amazoid] Marked as read for all players: " .. modData.literatureTitle)
         end
-
-        -- Also store read flag in item's modData for universal checking (split-screen)
-        -- This allows checking if ANY player has read it without iterating all players
-        modData.AmazoidRead = true
-        -- Note: InventoryItems don't have transmitModData(), the modData persists automatically
     end
 
     self:setVisible(false)

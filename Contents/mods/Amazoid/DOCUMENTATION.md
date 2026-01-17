@@ -360,7 +360,7 @@ The lore letters gradually reveal the merchants' backstory:
 **Timing:** Within 1-3 days of game start (configurable)
 
 **Conditions for visit:**
-- Player is 20-100 tiles away from a mailbox
+- Player is 15-100 tiles away from a mailbox
 
 **What happens:**
 1. Discovery letter appears in mailbox

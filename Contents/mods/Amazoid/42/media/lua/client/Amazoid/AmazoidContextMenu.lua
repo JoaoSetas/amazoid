@@ -6,6 +6,7 @@
 ]]
 
 require "Amazoid/AmazoidData"
+require "Amazoid/AmazoidUtils"
 require "Amazoid/AmazoidMailbox"
 require "Amazoid/AmazoidLetters"
 require "Amazoid/AmazoidCatalogs"
@@ -163,6 +164,8 @@ end
 Events.OnFillWorldObjectContextMenu.Add(onFillWorldObjectContextMenu)
 
 --- Add Amazoid read option to letter items in inventory
+-- Note: Items with ItemType=base:literature and modData.literatureTitle get checkmarks
+-- automatically from PZ when player:addReadLiterature() is called for all players
 ---@param player number Player index
 ---@param context ISContextMenu The context menu
 ---@param items table List of inventory items
@@ -171,7 +174,8 @@ local function onFillInventoryObjectContextMenu(player, context, items)
     if not playerObj then return end
 
     -- Find Amazoid letter items
-    -- Note: PZ automatically shows checkmark icon for items with literatureTitle when read
+    -- PZ automatically shows checkmarks for base:literature items via isLiteratureRead()
+    -- Catalogs and Contracts use base:normal so no checkmarks
     for _, itemStack in ipairs(items) do
         local item = itemStack
         if type(itemStack) == "table" then
@@ -183,11 +187,13 @@ local function onFillInventoryObjectContextMenu(player, context, items)
             local option = nil
             local iconTexture = item:getTex()
 
-            -- Letters
+            -- Letters - PZ shows checkmarks automatically via isLiteratureRead()
+            -- when items have ItemType=base:literature and modData.literatureTitle
             if itemType == "Amazoid.DiscoveryLetter" then
                 option = context:addOption("Read Letter", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj,
                     "discovery")
             elseif itemType == "Amazoid.SignedContract" then
+                -- Contract: NO read tracking (ItemType=base:normal)
                 option = context:addOption("Read Contract", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj,
                     "contract")
             elseif itemType == "Amazoid.MissionLetter" then
@@ -208,7 +214,7 @@ local function onFillInventoryObjectContextMenu(player, context, items)
             elseif itemType == "Amazoid.OrderReceipt" then
                 option = context:addOption("Read Receipt", item, Amazoid.ContextMenu.onReadInventoryLetter, playerObj,
                     "receipt")
-                -- Unified Catalog (edition stored in modData)
+                -- Unified Catalog (edition stored in modData) - NO read tracking (ItemType=base:normal)
             elseif itemType == "Amazoid.Catalog" then
                 local edition = item:getModData().AmazoidEdition or "basic_vol1"
                 option = context:addOption("Browse Catalog", item, Amazoid.ContextMenu.onBrowseCatalog, playerObj,

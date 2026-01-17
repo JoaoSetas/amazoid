@@ -40,26 +40,26 @@ Amazoid.Client.playerData = {
     discoveredLore = {},
     giftHistory = {},
     -- First contact tracking
-    firstContactMade = false,    -- Has the merchant made first contact?
-    firstContactDay = nil,       -- Random day chosen for first contact attempt
-    lastFirstContactAttempt = 0, -- Last hour we tried first contact
+    firstContactMade = false,     -- Has the merchant made first contact?
+    firstContactDay = nil,        -- Random day chosen for first contact attempt
+    lastFirstContactAttempt = 0,  -- Last hour we tried first contact
     -- Order tracking
-    hasPlacedFirstOrder = false, -- Has the player placed their first order (free)?
-    totalSpentByCategory = {},   -- Total money spent per catalog category (for volume unlock)
-    totalOrders = 0,             -- Total number of orders placed
-    totalSpent = 0,              -- Total money spent across all orders
+    hasPlacedFirstOrder = false,  -- Has the player placed their first order (free)?
+    totalSpentByCategory = {},    -- Total money spent per catalog category (for volume unlock)
+    totalOrders = 0,              -- Total number of orders placed
+    totalSpent = 0,               -- Total money spent across all orders
     -- Catalog progression
-    unlockedVolumes = {},        -- Current unlocked volume per category (e.g., {basic=2, tools=1})
-    unlockedCategories = {},     -- Which categories have been unlocked (for tracking reputation unlocks)
-    lastCatalogDay = 0,          -- Last day a new catalog was received (limit one per day)
+    unlockedVolumes = {},         -- Current unlocked volume per category (e.g., {basic=2, tools=1})
+    unlockedCategories = {},      -- Which categories have been unlocked (for tracking reputation unlocks)
+    lastCatalogDay = 0,           -- Last day a new catalog was received (limit one per day)
     -- Mission tracking
-    lastMissionDay = 0,          -- Last day a new mission was spawned
-    totalMissionsCompleted = 0,  -- Total missions completed successfully
+    lastMissionDay = 0,           -- Last day a new mission was spawned
+    totalMissionsCompleted = 0,   -- Total missions completed successfully
     -- Triggered letters tracking
-    sentTriggeredLetters = {},   -- Which triggered letters have been sent (e.g., {kills_10=true, days_7=true})
-    contractSignedDay = 0,       -- Day number when contract was signed (for days survived tracking)
+    sentTriggeredLetters = {},    -- Which triggered letters have been sent (e.g., {kills_10=true, days_7=true})
+    contractSignedDay = 0,        -- Day number when contract was signed (for days survived tracking)
     -- Merchant visit tracking
-    hoursSinceLastVisit = 0,     -- Hours elapsed since last merchant visit
+    hoursSinceLastVisit = 0,      -- Hours elapsed since last merchant visit
     pendingMerchantVisit = false, -- True if visit was blocked (player too close) and needs retry
 }
 
@@ -403,15 +403,15 @@ function Amazoid.Client.tryFirstContact()
     end
 
     -- Find a nearby mailbox
-    -- Player should be 20-100 tiles away (close enough to hear)
-    local mailbox, tooClose = Amazoid.Client.findNearbyMailbox(player, 20, 100)
+    -- Player should be 10-100 tiles away (close enough to hear)
+    local mailbox, tooClose = Amazoid.Client.findNearbyMailbox(player, 10, 100)
 
     if not mailbox then
         if tooClose then
             print("[Amazoid] First contact: Player too close to mailbox, will retry")
             return false, true
         end
-        print("[Amazoid] First contact: No suitable mailbox found (player needs to be 20-100 tiles from a mailbox)")
+        print("[Amazoid] First contact: No suitable mailbox found (player needs to be 10-100 tiles from a mailbox)")
         return false, false
     end
 
@@ -419,7 +419,7 @@ function Amazoid.Client.tryFirstContact()
     local hasLetter = Amazoid.Mailbox.hasDiscoveryLetter(mailbox)
     if hasLetter then
         print("[Amazoid] First contact: Mailbox at " ..
-        mailbox:getX() .. "," .. mailbox:getY() .. " already has discovery letter flag in modData")
+            mailbox:getX() .. "," .. mailbox:getY() .. " already has discovery letter flag in modData")
         print("[Amazoid] Use AmazoidDebug.reset() to clear all Amazoid data")
         return false, false
     end
@@ -519,7 +519,7 @@ end
 
 --- Check if any player is too close to the contract mailbox
 --- The merchant won't visit if players are watching
----@return boolean True if any player is within 20 tiles of the contract mailbox
+---@return boolean True if any player is within 15 tiles of the contract mailbox
 function Amazoid.Client.isPlayerTooCloseToMailbox()
     local contractMailbox = Amazoid.Client.playerData.contractMailbox
     if not contractMailbox then return false end
@@ -527,7 +527,7 @@ function Amazoid.Client.isPlayerTooCloseToMailbox()
     local allPlayers = Amazoid.Client.getAllLocalPlayers()
     if #allPlayers == 0 then return false end
 
-    local minDistance = 20 -- Same as first contact distance
+    local minDistance = 15 -- Same as first contact distance
 
     for _, player in ipairs(allPlayers) do
         local px, py = player:getX(), player:getY()
@@ -536,7 +536,8 @@ function Amazoid.Client.isPlayerTooCloseToMailbox()
         local distance = math.sqrt(dx * dx + dy * dy)
 
         if distance < minDistance then
-            print("[Amazoid] Player too close to mailbox: " .. math.floor(distance) .. " tiles (min: " .. minDistance .. ")")
+            print("[Amazoid] Player too close to mailbox: " ..
+                math.floor(distance) .. " tiles (min: " .. minDistance .. ")")
             return true
         end
     end
